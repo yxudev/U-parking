@@ -11,6 +11,9 @@
         <spring.version>5.0.6.RELEASE</spring.version>
         <org.slf4j-version>1.7.25</org.slf4j-version>
         <hibernate.version>5.3.7.Final</hibernate.version>
+        <groupId>org.flywaydb</groupId>
+        <artifactId>flyway-maven-plugin</artifactId>
+        <flyway.version>5.2.1</flyway.version>
     </properties>
 
     <build>
@@ -34,7 +37,23 @@
                     </includes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>${flyway.version}</version>
+                <configuration>
+                    <driver>org.postgresql.Driver</driver>
+                    <url>jdbc:postgresql://localhost:5432/jp</url>
+                    <user>yishan</user>
+                    <password>JZM1926</password>
+                    <locations>
+                        <location>db/migration</location>
+                    </locations>
+                </configuration>
+            </plugin>
         </plugins>
+
+
     </build>
 
     <dependencies>
