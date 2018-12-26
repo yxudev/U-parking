@@ -28,13 +28,13 @@ public class User {
     @Column(name = "username", unique = true)
     private String username;
 
-    @Column(name = "zipcode")
-    public int zipcode;
+    @Column(name = "zip_code")
+    public int zipCode;
 
     @Column(name = "date_of_birth")
     protected Instant dateOfBirth;
 
-    @Column(name = "your_phone_number")
+    @Column(name = "phone_number")
     private String phoneNumber;
 
     public User(){
@@ -75,11 +75,11 @@ public class User {
         this.username = username;
     }
 
-    public Integer getZipcode(){
-        return this.zipcode;
+    public Integer getZipCode(){
+        return this.zipCode;
     }
-    public void setZipcode(Integer zipcode){
-        this.zipcode = zipcode;
+    public void setZipCode(Integer zipCode){
+        this.zipCode = zipCode;
     }
 
     public Instant getDateOfBirth(){

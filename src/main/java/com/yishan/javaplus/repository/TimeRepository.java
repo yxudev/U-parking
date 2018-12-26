@@ -6,16 +6,13 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface CarRepository extends CrudRepository<User, Long> {
+public interface TimeRepository extends CrudRepository<User, Long> {
 
     List<User> findAll();
     @Query
-    ("Select c FROM cars LEFT JOIN FETCH cars.images")
+            ("Select t FROM time_duration LEFT JOIN FETCH time_duration.images")
     List<String> findAllWithImage();
     @Query
-    ("Select c FROM cars c LEFT JOIN FETCH c.images where c.id = ?1")
+            ("Select t FROM time_duration  t LEFT JOIN FETCH t.images where t.id = ?1")
     List<String> findByIdWithImage(Long Id);
-
-
-
 }

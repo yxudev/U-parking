@@ -12,8 +12,8 @@ public class Time {
     @Id
     private Long id;
 
-    @Column(name = "parking_mins")
-    public int mins;
+    @Column(name = "parking_min")
+    public int min;
 
     @Column(name = "parking_days")
     private String days;
@@ -24,11 +24,11 @@ public class Time {
 
     }
 
-    public Integer getMins(){
-        return this.mins;
+    public Integer getMin(){
+        return this.min;
     }
-    public void setMins(Integer mins){
-        this.mins = mins;
+    public void setMin(Integer min){
+        this.min = min;
     }
 
     public String  getDays(){
