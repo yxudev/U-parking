@@ -1,4 +1,4 @@
-package com.yishan.javaplus.config;
+package javaplus.config;
 
 import org.springframework.context.annotation.Configuration;
 
