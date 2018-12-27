@@ -9,11 +9,9 @@ import java.util.List;
 public interface CarRepository extends CrudRepository<User, Long> {
 
     List<User> findAll();
-    @Query
-    ("Select c FROM cars LEFT JOIN FETCH cars.images")
+    @Query("Select c FROM cars LEFT JOIN FETCH cars.images")
     List<String> findAllWithImage();
-    @Query
-    ("Select c FROM cars c LEFT JOIN FETCH c.images where c.id = ?1")
+    @Query("Select c FROM cars c LEFT JOIN FETCH c.images where c.id = ?1")
     List<String> findByIdWithImage(Long Id);
 
 

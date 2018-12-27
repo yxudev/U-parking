@@ -1,4 +1,4 @@
-package javaplus.domain;
+package com.yishan.javaplus.domain;
 
 
 import javax.persistence.Column;
@@ -7,17 +7,24 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "car_manager")
+@Table(name = "managers")
 public class Manager {
     @Id
     private Long id;
 
-    @Column(name = "add_tips")
+    @Column(name = "tips")
     private float tip;
 
 
 
     public Manager(){
 
+    }
+
+    public float getTip() {
+        return this.tip;
+    }
+    public void setTip(Integer tip){
+        this.tip = tip;
     }
 }

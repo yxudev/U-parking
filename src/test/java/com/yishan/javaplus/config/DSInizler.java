@@ -1,4 +1,4 @@
-package javaplus.config;
+package com.yishan.javaplus.config;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.jpa.HibernatePersistenceProvider;

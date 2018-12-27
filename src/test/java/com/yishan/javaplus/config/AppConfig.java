@@ -1,4 +1,4 @@
-package javaplus.config;
+package com.yishan.javaplus.config;
 
 
 import org.slf4j.Logger;
@@ -7,13 +7,15 @@ import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
 @Configuration
-@ComponentScan(basePackages = "com.yishan.javaplus")
+@ComponentScan(basePackages = "com.yishan.javaplus",
+    excludeFilters = @ComponentScan.Filter(type = FilterType.REGEX,pattern = "com.yishan.javaplus.api.*"))
 public class AppConfig {
 
     @Autowired

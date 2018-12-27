@@ -1,4 +1,4 @@
-package javaplus.domain;
+package com.yishan.javaplus.domain;
 
 
 import javax.persistence.Column;
