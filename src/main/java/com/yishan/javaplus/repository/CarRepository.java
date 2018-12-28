@@ -1,18 +1,19 @@
 package com.yishan.javaplus.repository;
 
-import com.yishan.javaplus.domain.User;
+import com.yishan.javaplus.domain.Car;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
+import java.io.CharArrayReader;
 import java.util.List;
 
-public interface CarRepository extends CrudRepository<User, Long> {
+public interface CarRepository extends CrudRepository<Car, Long> {
 
-    List<User> findAll();
+    List<Car> findAll();
     @Query("Select c FROM cars LEFT JOIN FETCH cars.images")
-    List<String> findAllWithImage();
+    List<CharArrayReader> findAllWithImage();
     @Query("Select c FROM cars c LEFT JOIN FETCH c.images where c.id = ?1")
-    List<String> findByIdWithImage(Long Id);
+    List<Car> findByIdWithImage(Long Id);
 
 
 

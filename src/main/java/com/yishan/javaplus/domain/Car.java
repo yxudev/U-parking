@@ -18,32 +18,34 @@ public class Car {
     @Column(name = "model")
     public String model;
 
-    @Column(name = "type")
-    public String type;
+    @Column(name = "body_type")
+    public String bodyType;
 
-
-    public Car(){
-
+    public Long getId() {
+        return id;
     }
 
-    public String getVin(){
-        return this.vin;
+    public String getVin() {
+        return vin;
     }
-    public void setVin(String vin){
+
+    public void setVin(String vin) {
         this.vin = vin;
     }
 
-    public String getModel(){
-        return this.model;
+    public String getModel() {
+        return model;
     }
-    public void setModel(String model){
+
+    public void setModel(String model) {
         this.model = model;
     }
 
-    public String getType(){
-        return this.type;
+    public String getBodyType() {
+        return bodyType;
     }
-    public void setType(String type){
-        this.type = type;
+
+    public void setBodyType(String bodyType) {
+        this.bodyType = bodyType;
     }
 }
