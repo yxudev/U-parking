@@ -1,10 +1,8 @@
 package com.yishan.javaplus.domain;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "cars")
@@ -20,6 +18,15 @@ public class Car {
 
     @Column(name = "body_type")
     public String bodyType;
+
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "time_duration_id_seq",cascade = CascadeType.ALL)
+    private List<ParkingTime> parkingTimes;
+
+    @OneToOne(fetch = FetchType.LAZY,mappedBy = "plates_id_seq",cascade = CascadeType.ALL)
+    private Plate plate;
+
+
 
     public Long getId() {
         return id;

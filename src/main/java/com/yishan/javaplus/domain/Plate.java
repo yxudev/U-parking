@@ -1,10 +1,8 @@
 package com.yishan.javaplus.domain;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "plates")
@@ -17,6 +15,13 @@ public class Plate {
 
     @Column(name = "state")
     public String state;
+
+
+    @OneToOne(fetch = FetchType.LAZY,mappedBy = "cars",cascade = CascadeType.ALL)
+    private Car car;
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "time_duration",cascade = CascadeType.ALL)
+    private List<ParkingTime> parkingTimes;
 
 
     public Plate() {

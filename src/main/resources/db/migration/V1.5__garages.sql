@@ -13,4 +13,4 @@ create table garages (
     ON UPDATE NO ACTION
 
 );
-ALTER SEQUENCE garages_id_seq OWNED BY users.id;
+ALTER SEQUENCE garages_id_seq OWNED BY garages.id;

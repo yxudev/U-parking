@@ -1,5 +1,4 @@
 package com.yishan.javaplus.config;
-
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.slf4j.Logger;
@@ -15,7 +14,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.util.Properties;
-
 
 //import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Configuration

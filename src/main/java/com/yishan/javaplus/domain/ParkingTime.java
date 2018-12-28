@@ -1,14 +1,11 @@
 package com.yishan.javaplus.domain;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "time_duration")
-public class Time {
+public class ParkingTime {
     @Id
     private Long id;
 
@@ -18,10 +15,17 @@ public class Time {
     @Column(name = "parking_days")
     private String days;
 
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "cars_id_seq")
+    private Car car;
 
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "plates_id_seq")
+    private Plate plate;
 
-    public Time(){
+    public ParkingTime(Long id){
 
+        this.id = id;
     }
 
     public Integer getMin(){
