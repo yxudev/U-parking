@@ -4,10 +4,14 @@ package com.yishan.javaplus.domain;
 import javax.persistence.*;
 import java.util.List;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+
 @Entity
 @Table(name = "cars")
 public class Car {
     @Id
+    @GeneratedValue(strategy=SEQUENCE, generator="cars_id_seq")
+    @SequenceGenerator(name="cars_id_seq", sequenceName="cars_id_seq", allocationSize=1)
     private Long id;
 
     @Column(name = "vin")
@@ -20,13 +24,16 @@ public class Car {
     public String bodyType;
 
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "time_duration_id_seq",cascade = CascadeType.ALL)
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "car",cascade = CascadeType.ALL)
     private List<ParkingTime> parkingTimes;
 
-    @OneToOne(fetch = FetchType.LAZY,mappedBy = "plates_id_seq",cascade = CascadeType.ALL)
-    private Plate plate;
+//    @OneToOne(fetch = FetchType.LAZY,mappedBy = "plates_id_seq",cascade = CascadeType.ALL)
+//    private Plate plate;
 
-
+    public List<ParkingTime> getParkingTimes() {
+        return parkingTimes;
+    }
 
     public Long getId() {
         return id;

@@ -1,4 +1,4 @@
-CREATE SEQUENCE user_id_seq;
+CREATE SEQUENCE users_id_seq;
 create table users (
    id bigint not null DEFAULT NEXTVAL('users_id_seq'),
    first_name VARCHAR(255) not NULL,
@@ -9,12 +9,6 @@ create table users (
    zip_code VARCHAR(255) not NULL,
    date_of_birth varchar(255) not null,
    phone_number varchar(255) not null,
-    primary key (id)
-    CONSTRAINT fk_user
-    FOREIGN KEY (users_id)
-    REFERENCES users (id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
-
+   primary key (id)
 );
 ALTER SEQUENCE users_id_seq OWNED BY users.id;

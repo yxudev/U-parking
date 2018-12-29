@@ -21,20 +21,13 @@ public class AppConfig {
     @Autowired
     private Environment environment;
     private final Logger logger = getLogger(getClass());
-    private String propertyKey = "amazon.s3.bucket";
 
     @Bean(name = "applicationProperties")
     public PropertiesFactoryBean getDbProperties() {
         PropertiesFactoryBean bean = new PropertiesFactoryBean();
         String profile = environment.getActiveProfiles()[0];
-        logger.debug("applicationProperties is "+profile);
-        bean.setLocation(new ClassPathResource("META-INF/env/application-"+profile+".properties"));
-        return bean;
-    }
-    @Bean(name = "sharePoperties")
-    public PropertiesFactoryBean getShareProperties(){
-        PropertiesFactoryBean bean = new PropertiesFactoryBean();
-        bean.setLocation(new ClassPathResource("META-INF/share-runtime.properties"));
+        logger.debug("applicationProperties is " + profile);
+        bean.setLocation(new ClassPathResource("META-INF/env/application-" + profile + ".properties"));
         return bean;
     }
 

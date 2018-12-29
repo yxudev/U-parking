@@ -1,23 +1,30 @@
 package com.yishan.javaplus.config;
+
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
 //import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Configuration
 @EnableTransactionManagement
+@EnableJpaRepositories(basePackages = "com.yishan.javaplus.repository")
 public class DSInizler {
 //    protected String databaseUrl = "jdbc:postgresql://localhost:5432/jp";
 //    protected String databaseUserName = "yishan";
@@ -26,7 +33,7 @@ public class DSInizler {
 
     @Autowired
     private Environment environment;
-    @Value("#{ applicationProperties['database.servername']}")
+    @Value("#{ applicationProperties['database.serverName']}")
     protected String databaseUrl;
     @Value("#{ applicationProperties['database.username']}")
     protected String databaseUserName = "";
@@ -82,5 +89,13 @@ public class DSInizler {
         factoryBean.setJpaProperties(props);
 
         return factoryBean;
+    }
+
+    @Bean(name="transactionManager")
+    public PlatformTransactionManager transactionManager(@Qualifier("entityManagerFactory") EntityManagerFactory entityManagerFactory, @Autowired DataSource dataSource) {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(entityManagerFactory);
+        transactionManager.setDataSource(dataSource);
+        return transactionManager;
     }
 }
