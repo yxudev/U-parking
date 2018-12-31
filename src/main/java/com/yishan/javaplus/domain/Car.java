@@ -24,7 +24,6 @@ public class Car {
     public String bodyType;
 
 
-
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "car",cascade = CascadeType.ALL)
     private List<ParkingTime> parkingTimes;
 

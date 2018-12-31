@@ -21,9 +21,12 @@
 //        private final Logger logger = LoggerFactory.getLogger(getClass());
 //
 //
-////        @Autowired
-////        @Qualifier(BeanIds.AUTHENTICATION_MANAGER)
-////        private AuthenticationManager authenticationManager;
+////    private final AuthenticationManager authenticationManager;
+//
+////    @Autowired
+////    public UserController(@Qualifier(BeanIds.AUTHENTICATION_MANAGER) AuthenticationManager authenticationManager) {
+////        this.authenticationManager = authenticationManager;
+////    }
 //
 //    @RequestMapping(method = RequestMethod.GET)
 //    public List<User> getUserList(){
