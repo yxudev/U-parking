@@ -14,7 +14,7 @@ public class Car {
     @SequenceGenerator(name="cars_id_seq", sequenceName="cars_id_seq", allocationSize=1)
     private Long id;
 
-    @Column(name = "vin")
+    @Column(name = "vin" , unique = true)
     private String vin;
 
     @Column(name = "model")
@@ -61,4 +61,5 @@ public class Car {
     public void setBodyType(String bodyType) {
         this.bodyType = bodyType;
     }
+
 }
