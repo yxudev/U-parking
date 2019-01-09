@@ -1,2 +1,2 @@
 alter table cars drop column vin;
-alter table cars add column vin varchar(255) not NULL;
+alter table cars add column vin varchar(255) not NULL default '123456789';
