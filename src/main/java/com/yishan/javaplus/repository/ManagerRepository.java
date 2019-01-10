@@ -6,7 +6,7 @@
 //
 //import java.util.List;
 //
-//public interface ManagerRepository extends CrudRepository<User, Long> {
+//        public interface ManagerRepository extends CrudRepository<User, Long> {
 //
 //    List<User> findAll();
 //    @Query
