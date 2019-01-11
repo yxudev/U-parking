@@ -2,7 +2,6 @@ package com.yishan.javaplus.domain;
 
 
 import javax.persistence.*;
-import java.util.List;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -24,15 +23,15 @@ public class Car {
     public String bodyType;
 
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "car",cascade = CascadeType.ALL)
-    private List<ParkingTime> parkingTimes;
+//    @OneToMany(fetch = FetchType.LAZY,mappedBy = "car",cascade = CascadeType.ALL)
+//    private List<ParkingTime> parkingTimes;
 
 //    @OneToOne(fetch = FetchType.LAZY,mappedBy = "plates_id_seq",cascade = CascadeType.ALL)
 //    private Plate plate;
 
-    public List<ParkingTime> getParkingTimes() {
-        return parkingTimes;
-    }
+//    public List<ParkingTime> getParkingTimes() {
+//        return parkingTimes;
+//    }
 
     public Long getId() {
         return id;

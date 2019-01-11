@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -67,6 +68,7 @@ public class DSInizler {
         return dataSource;
     }
     @Bean(name="entityManagerFactory")
+    @Profile({"dev","test","state","prod"})
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
 
@@ -78,7 +80,31 @@ public class DSInizler {
         props.put("hibernate.hbm2ddl.auto", "validate");
 //        props.put("hibernate.physical_naming_strategy", "com.overture.family.extend.hibernate.ImprovedNamingStrategy")
         props.put("hibernate.connection.charSet","UTF-8");
-        props.put("hibernate.show_sql","true");
+        props.put("hibernate.show_sql","false");
+//        props.put("")
+
+
+//            <property name="hibernate.ejb.interceptor" value="com.overture.family.repository.jpa.DBNullsFirstLastInteceptor"/>
+
+        factoryBean.setJpaProperties(props);
+
+        return factoryBean;
+    }
+
+    @Bean(name="entityManagerFactory")
+    @Profile({"unit"})
+    public LocalContainerEntityManagerFactoryBean entityUnitManagerFactoryBean() {
+        LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
+
+        factoryBean.setDataSource(getDataSource());
+        factoryBean.setPackagesToScan(new String[] { "com.yishan.javaplus.domain","com.yishan.javaplus.repository" });
+        factoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
+        Properties props = new Properties();
+        props.put("hibernate.dialect", "org.hibernate.spatial.dialect.postgis.PostgisDialect");
+        props.put("hibernate.hbm2ddl.auto", "validate");
+//        props.put("hibernate.physical_naming_strategy", "com.overture.family.extend.hibernate.ImprovedNamingStrategy")
+        props.put("hibernate.connection.charSet","UTF-8");
+        props.put("hibernate.show_sql","false");
 //        props.put("")
 
 

@@ -37,9 +37,10 @@ public class User {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    public User(){
+    public User(){}
 
-    }
+    public Long getId() { return id; }
+
     public String getEmail(){
         return this.email;
     }
@@ -64,9 +65,7 @@ public class User {
     public String getPassword(){
         return this.password;
     }
-    public void setPassword(String password){
-        this.password = password;
-    }
+    public void setPassword(String password){ this.password = password; }
 
     public String getUsername(){
         return this.username;
