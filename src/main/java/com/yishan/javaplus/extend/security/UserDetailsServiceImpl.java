@@ -1,7 +1,7 @@
 package com.yishan.javaplus.extend.security;
 
 import com.yishan.javaplus.domain.User;
-import com.yishan.javaplus.service.jms.UserService;
+import com.yishan.javaplus.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

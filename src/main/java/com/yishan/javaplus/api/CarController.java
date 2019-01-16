@@ -1,7 +1,7 @@
 package com.yishan.javaplus.api;
 
 import com.yishan.javaplus.domain.Car;
-import com.yishan.javaplus.service.jms.CarService;
+import com.yishan.javaplus.service.CarService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

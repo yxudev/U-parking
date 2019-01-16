@@ -1,4 +1,4 @@
-package com.yishan.javaplus.service.jms;
+package com.yishan.javaplus.service;
 
 import com.yishan.javaplus.domain.Car;
 import com.yishan.javaplus.repository.CarRepository;
