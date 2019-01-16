@@ -9,6 +9,8 @@ public interface CarRepository extends CrudRepository<Car, Long> {
 
     List<Car> findAll();
     Car findByVin(String vin);
+    Car findByModel(String model);
+    Car findByBodyType(String bodyType);
 
 //    @Query("Select c FROM cars c LEFT JOIN FETCH cars.images")
 //    List<CharArrayReader> findAllWithImage();

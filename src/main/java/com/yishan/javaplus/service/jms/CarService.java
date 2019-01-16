@@ -29,6 +29,14 @@ public class CarService {
         return carRepository.findByVin(Vin);
     }
 
+    public Car findByModel(String Model) {
+        return carRepository.findByModel(Model);
+    }
+
+    public Car findByBodyType(String BodyType) {
+        return carRepository.findByBodyType(BodyType);
+    }
+
     public Car save(Car car) {
         return carRepository.save(car);
     }
