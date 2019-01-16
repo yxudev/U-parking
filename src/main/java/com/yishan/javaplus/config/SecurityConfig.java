@@ -6,10 +6,17 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private UserDetailsService userDetailService;
+
     //step 1
 //    @Autowired
 //    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
@@ -25,12 +32,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .formLogin();
 //    }
 
-
     //step 2
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("user")
-                .password("{noop}password").roles("REGISTERED_USER");
+
+//        auth.inMemoryAuthentication().withUser("user")
+//                .password("{noop}password").roles("REGISTERED_USER");
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
+        auth.userDetailsService(userDetailService).passwordEncoder(encoder);
+
     }
         protected void configure(HttpSecurity http) throws Exception{
         http.csrf().disable().authorizeRequests().antMatchers("/api/users/login","/api/user/login","/api/user/signup/").permitAll()

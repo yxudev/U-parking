@@ -14,8 +14,8 @@ public class Garage {
     @SequenceGenerator(name="garages_id_seq", sequenceName="garages_id_seq", allocationSize=1)
     private Long id;
 
-    @Column(name = "lot")
-    private String lot;
+    @Column(name = "lot_number")
+    private String lotNumber;
 
     @Column(name = "city")
     public String city;
@@ -23,15 +23,16 @@ public class Garage {
     @Column(name = "garage_name")
     public String  garageName;
 
+
     public Garage(){
 
     }
-
-    public String getLot(){
-        return this.lot;
+    public Long getId() { return id; }
+    public String getLotNumber(){
+        return this.lotNumber;
     }
-    public void setLot(String lot){
-        this.lot = lot;
+    public void setLotNumber(String lotNumber){
+        this.lotNumber = lotNumber;
     }
 
     public String getCity(){
@@ -45,6 +46,6 @@ public class Garage {
         return this.garageName;
     }
     public void setGarageName(String garageName){
-        this.lot = garageName;
+        this.garageName = garageName;
     }
 }

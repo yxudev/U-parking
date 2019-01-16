@@ -1,15 +1,19 @@
 package com.yishan.javaplus.domain;
 
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.Instant;
+import java.util.Collection;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
     @Id
     private Long id;
 
@@ -61,6 +65,19 @@ public class User {
     public void setLastName(String lastName){
         this.lastName = lastName;
     }
+
+    public boolean isAccountNonLocked(){
+        return true;
+    }
+    public boolean isAccountNonExpired(){
+        return isAccountNonExpired();
+    }
+
+    public Collection<? extends GrantedAuthority> getAuthorities(){return null;}
+
+    public boolean isCredentialsNonExpired(){return true;}
+
+    public boolean isEnabled(){return true;}
 
     public String getPassword(){
         return this.password;

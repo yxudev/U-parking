@@ -16,12 +16,13 @@ public class Plate {
     public String state;
 
 
-//    @OneToOne(fetch = FetchType.LAZY,mappedBy = "cars",cascade = CascadeType.ALL)
-//    private Car car;
-//
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "car_id")
+    private Car car;
+
 //    @OneToMany(fetch = FetchType.LAZY,mappedBy = "time_duration",cascade = CascadeType.ALL)
 //    private List<ParkingTime> parkingTimes;
-
+//
 
     public Plate() { }
 

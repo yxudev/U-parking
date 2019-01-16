@@ -24,7 +24,7 @@ public class ParkingTime {
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "car_id")
     private Car car;
-
+//
 //    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 //    @JoinColumn(name = "plate_id")
 //    private Plate plate;
