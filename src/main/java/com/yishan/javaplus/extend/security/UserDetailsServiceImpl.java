@@ -11,17 +11,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
+
     @Autowired
     private UserService userService;
 
-    private static final Logger logger = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String Username){
+    public UserDetails loadUserByUsername(String username){
         User domainUser = null;
         try {
-            domainUser = userService.findByUsername(Username);
+            domainUser = userService.findByUsername(username);
         }
         catch (Exception repositoryProblem){
             logger.debug("catch AuthenticationServiceException from AuthenticationProvider");
