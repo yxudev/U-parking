@@ -12,6 +12,14 @@ import java.util.List;
     @Autowired
     private UserRepository userRepository;
 
+//    @Transactional
+//    public User createUser(User newUser){
+//
+//    }
+
+
+
+
     public List<User> findAll() {
 //        List<User> users = Lists.newArrayList(userRepository.findAll());
         return userRepository.findAll();
@@ -19,10 +27,6 @@ import java.util.List;
 
     public User findById(Long Id) {
         return userRepository.findById(Id).get();
-    }
-
-    public User save(User user) {
-        return userRepository.save(user);
     }
 
     public User findByLastname(String lastName) {
@@ -41,4 +45,7 @@ import java.util.List;
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
+
+    public User save(User user) {
+        return userRepository.save(user);}
  }

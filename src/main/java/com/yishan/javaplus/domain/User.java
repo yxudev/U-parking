@@ -1,20 +1,22 @@
 package com.yishan.javaplus.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.time.Instant;
+import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Collection;
+
+import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
     @Id
+    @GeneratedValue(strategy=SEQUENCE, generator="users_id_seq")
+    @SequenceGenerator(name="users_id_seq", sequenceName="users_id_seq", allocationSize=1)
     private Long id;
 
     @Column(name = "first_name")
@@ -35,8 +37,12 @@ public class User implements UserDetails {
     @Column(name = "zip_code")
     public String zipCode;
 
+
+
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     @Column(name = "date_of_birth")
-    protected Instant dateOfBirth;
+    protected LocalDate dateOfBirth;
 
     @Column(name = "phone_number")
     private String phoneNumber;
@@ -69,8 +75,10 @@ public class User implements UserDetails {
     public boolean isAccountNonLocked(){
         return true;
     }
+
+
     public boolean isAccountNonExpired(){
-        return isAccountNonExpired();
+        return true;
     }
 
     public Collection<? extends GrantedAuthority> getAuthorities(){return null;}
@@ -98,10 +106,10 @@ public class User implements UserDetails {
         this.zipCode = zipCode;
     }
 
-    public Instant getDateOfBirth(){
+    public LocalDate getDateOfBirth(){
         return this.dateOfBirth;
     }
-    public void setDateOfBirth(Instant dateOfBirth){
+    public void setDateOfBirth(LocalDate dateOfBirth){
         this.dateOfBirth = dateOfBirth;
     }
 
