@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
+import org.springframework.mobile.device.Device;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.BeanIds;
@@ -69,7 +70,7 @@ public class UserController {
     }
 
     @RequestMapping(value ="/login", method = RequestMethod.POST, params = {"username", "password"})
-    public User getUserByUsername(@RequestParam("username") String username, @RequestParam("password") String password) {
+    public User getUserByUsername(@RequestParam("username") String username, @RequestParam("password") String password,Device device) {
         logger.debug("username is: " + username);
         logger.debug("password is: " + password);
         Authentication notFullyAuthenticated = new UsernamePasswordAuthenticationToken(username, password);
@@ -77,7 +78,4 @@ public class UserController {
         return null;
     }
 
-
-    private class RecordDisplay {
-    }
 }
