@@ -3,8 +3,8 @@ package com.yishan.javaplus.service;
 import com.yishan.javaplus.domain.User;
 import com.yishan.javaplus.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -46,6 +46,11 @@ import java.util.List;
         return userRepository.findByEmail(email);
     }
 
-    public User save(User user) {
-        return userRepository.save(user);}
+    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+
+    public User createNewUser(User newUser) {
+        String encodePassword = encoder.encode(newUser.getPassword());
+        newUser.setPassword(encodePassword);
+        return userRepository.save(newUser);}
  }

@@ -25,9 +25,23 @@ public class UserServiceTest {
     @Autowired
     private UserRepository userRepository;
 
+//    @Test
+//    @Transactional
+//    public void findByIdTest() {
+//        User u = new User();
+//        u.setUsername("Admin");
+//        u.setEmail("gmail@gmail.com");
+//        u.setFirstName("sa");
+//        u.setLastName("bi");
+//        userRepository.save(u);
+//        Optional<User> testUser = userRepository.findById(u.getId());
+//        assertNotNull(testUser);
+//        assertEquals(u.getId(), testUser.get().getId());
+//    }
+
     @Test
     @Transactional
-    public void findByIdTest() {
+    public void createNewUserTest() {
         User u = new User();
         u.setUsername("Admin");
         u.setEmail("gmail@gmail.com");
