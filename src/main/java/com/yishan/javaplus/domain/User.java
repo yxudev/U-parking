@@ -2,6 +2,7 @@ package com.yishan.javaplus.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -38,13 +39,17 @@ public class User implements UserDetails {
     public String zipCode;
 
 
+    @Transient
+    @JsonIgnore
+    private Collection<? extends GrantedAuthority> authorities;
+
 
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     @Column(name = "date_of_birth")
     protected LocalDate dateOfBirth;
 
-    @Column(name = "phone_number")
+    @Column(name = "phone_number", unique = true)
     private String phoneNumber;
 
     public User(){}
@@ -80,8 +85,15 @@ public class User implements UserDetails {
     public boolean isAccountNonExpired(){
         return true;
     }
-    //TODO add one more many
-    public Collection<? extends GrantedAuthority> getAuthorities(){return null;}
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
+        this.authorities = authorities;
+    }
 
     public boolean isCredentialsNonExpired(){return true;}
 

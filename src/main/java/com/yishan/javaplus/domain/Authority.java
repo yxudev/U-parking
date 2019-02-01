@@ -1,6 +1,5 @@
 package com.yishan.javaplus.domain;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.lang.NonNull;
 import org.springframework.security.core.GrantedAuthority;
@@ -28,7 +27,6 @@ public class Authority implements Serializable, GrantedAuthority {
     @JoinColumn(name = "user_id")
     @JsonIgnore
     private User user;
-
 
     public  Authority(){ }
 

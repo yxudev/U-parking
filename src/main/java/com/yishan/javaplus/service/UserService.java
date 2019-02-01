@@ -42,12 +42,14 @@ import java.util.UUID;
         return userRepository.findById(Id).get();
     }
 
-    public User findByLastname(String lastName) {
-        return userRepository.findByLastName(lastName);
+    public List<User> findByLastName(String lastName) {
+        List<User> user = userRepository.findByLastName(lastName);
+        return user;
     }
 
-    public User findByFirstname(String firstName) {
-        return userRepository.findByFirstName(firstName);
+    public List<User> findByFirstName(String FirstName) {
+        List<User> user = userRepository.findByFirstName(FirstName);
+        return user;
     }
 
     public User findByUsername(String username) {
@@ -79,4 +81,5 @@ import java.util.UUID;
         save(newUser);
         return newUser;
     }
- }
+
+}
