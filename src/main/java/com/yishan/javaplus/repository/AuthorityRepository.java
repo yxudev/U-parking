@@ -9,6 +9,7 @@ public interface AuthorityRepository extends CrudRepository<Authority, Long> {
 
     List<Authority> findAll();
 
-    //TODO find authorities by user
+    Authority findByUser(String username);
+
 
 }

@@ -86,6 +86,8 @@ public class User implements UserDetails {
         return true;
     }
 
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "user",cascade = CascadeType.ALL)
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;

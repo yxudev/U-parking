@@ -28,6 +28,10 @@ public class Authority implements Serializable, GrantedAuthority {
     @JsonIgnore
     private User user;
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
     public  Authority(){ }
 
     public Authority(User user, String authority){

@@ -13,6 +13,7 @@
         <hibernate.version>5.3.7.Final</hibernate.version>
         <groupId>org.flywaydb</groupId>
         <artifactId>flyway-maven-plugin</artifactId>
+        <aws.sdk.version>1.11.360</aws.sdk.version>
         <flyway.version>5.2.1</flyway.version>
         <fasterxml-jackson.version>2.9.8</fasterxml-jackson.version>
         <swagger.version>2.9.2</swagger.version>
@@ -328,6 +329,18 @@
             <version>${spring.version}</version>
         </dependency>
 
+
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk</artifactId>
+            <version>${aws.sdk.version}</version>
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>com.amazonaws</groupId>-->
+            <!--<artifactId>amazon-sqs-java-messaging-lib</artifactId>-->
+            <!--<version>${aws.sdk.version}</version>-->
+        <!--</dependency>-->
 
 
         <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
