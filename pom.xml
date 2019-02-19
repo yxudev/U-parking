@@ -1,1 +1,459 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">    <modelVersion>4.0.0</modelVersion>    <groupId>com.yishan.javaplus</groupId>    <artifactId>javaplus</artifactId>    <packaging>jar</packaging>    <version>0.0.1-SNAPSHOT</version>    <name>javaplus</name>    <properties>        <java-version>1.8</java-version>        <spring.version>5.0.6.RELEASE</spring.version>        <org.slf4j-version>1.7.25</org.slf4j-version>        <hibernate.version>5.3.7.Final</hibernate.version>        <groupId>org.flywaydb</groupId>        <artifactId>flyway-maven-plugin</artifactId>        <aws.sdk.version>1.11.360</aws.sdk.version>        <flyway.version>5.2.1</flyway.version>        <fasterxml-jackson.version>2.9.8</fasterxml-jackson.version>        <swagger.version>2.9.2</swagger.version>        <mockito.version>1.10.19</mockito.version>    </properties>    <profiles>        <profile>            <id>dev</id>            <build>                <plugins>                    <plugin>                        <groupId>org.flywaydb</groupId>                        <artifactId>flyway-maven-plugin</artifactId>                        <version>${flyway.version}</version>                        <configuration>                            <driver>org.postgresql.Driver</driver>                            <url>jdbc:postgresql://localhost:5432/dev</url>                            <user>yishan</user>                            <password>JZM1926</password>                            <locations>                                <location>db/migration</location>                            </locations>                        </configuration>                    </plugin>                </plugins>            </build>        </profile>        <profile>            <id>unit</id>            <build>                <plugins>                    <plugin>                        <groupId>org.flywaydb</groupId>                        <artifactId>flyway-maven-plugin</artifactId>                        <version>${flyway.version}</version>                        <configuration>                            <driver>org.postgresql.Driver</driver>                            <url>jdbc:postgresql://localhost:5432/unit</url>                            <user>yishan</user>                            <password>JZM1926</password>                            <locations>                                <location>db/migration</location>                            </locations>                        </configuration>                    </plugin>                </plugins>            </build>        </profile>        <profile>            <id>test</id>            <build>                <plugins>                    <plugin>                        <groupId>org.flywaydb</groupId>                        <artifactId>flyway-maven-plugin</artifactId>                        <version>${flyway.version}</version>                        <configuration>                            <driver>org.postgresql.Driver</driver>                            <url>jdbc:postgresql://localhost:5432/test</url>                            <user>yishan</user>                            <password>JZM1926</password>                            <locations>                                <location>db/migration</location>                            </locations>                        </configuration>                    </plugin>                </plugins>            </build>        </profile>    </profiles>    <build>        <finalName>javaplus</finalName>        <plugins>            <plugin>                <artifactId>maven-compiler-plugin</artifactId>                <configuration>                    <source>${java-version}</source>                    <target>${java-version}</target>                    <compilerArgument>-Xlint:all</compilerArgument>                    <showWarnings>true</showWarnings>                    <showDeprecation>true</showDeprecation>                </configuration>            </plugin>            <plugin>                <artifactId>maven-surefire-plugin</artifactId>                <configuration>                    <includes>                        <include>**/*Tests.java</include>                    </includes>                </configuration>            </plugin>            <!--<plugin>-->            <!--<groupId>org.flywaydb</groupId>-->            <!--<artifactId>flyway-maven-plugin</artifactId>-->            <!--<version>${flyway.version}</version>-->            <!--<configuration>-->            <!--<driver>org.postgresql.Driver</driver>-->            <!--<url>jdbc:postgresql://localhost:5432/jp</url>-->            <!--<user>yishan</user>-->            <!--<password>JZM1926</password>-->            <!--<locations>-->            <!--<location>db/migration</location>-->            <!--</locations>-->            <!--</configuration>-->            <!--</plugin>-->        </plugins>    </build>    <dependencies>        <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->        <dependency>            <groupId>org.springframework</groupId>            <artifactId>spring-core</artifactId>            <version>${spring.version}</version>        </dependency>        <dependency>            <groupId>org.springframework</groupId>            <artifactId>spring-core</artifactId>            <version>${spring.version}</version>        </dependency>        <dependency>            <groupId>org.springframework</groupId>            <artifactId>spring-web</artifactId>            <version>${spring.version}</version>        </dependency>        <dependency>            <groupId>javax.servlet</groupId>            <artifactId>javax.servlet-api</artifactId>            <version>4.0.1</version>        </dependency>        <dependency>            <groupId>org.springframework</groupId>            <artifactId>spring-webmvc</artifactId>            <version>${spring.version}</version>        </dependency>        <dependency>            <groupId>org.springframework</groupId>            <artifactId>spring-tx</artifactId>            <version>${spring.version}</version>        </dependency>        <dependency>            <groupId>org.springframework</groupId>            <artifactId>spring-test</artifactId>            <version>${spring.version}</version>            <scope>test</scope>        </dependency>        <dependency>            <groupId>org.springframework</groupId>            <artifactId>spring-orm</artifactId>            <version>${spring.version}</version>        </dependency>        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->        <dependency>            <groupId>com.fasterxml.jackson.core</groupId>            <artifactId>jackson-core</artifactId>            <version>${fasterxml-jackson.version}</version>        </dependency>        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->        <dependency>            <groupId>com.fasterxml.jackson.core</groupId>            <artifactId>jackson-annotations</artifactId>            <version>${fasterxml-jackson.version}</version>        </dependency>        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->        <dependency>            <groupId>com.fasterxml.jackson.core</groupId>            <artifactId>jackson-databind</artifactId>            <version>${fasterxml-jackson.version}</version>        </dependency>        <!-- https://mvnrepository.com/artifact/org.springframework.mobile/spring-mobile-device -->        <dependency>            <groupId>org.springframework.mobile</groupId>            <artifactId>spring-mobile-device</artifactId>            <version>2.0.0.M3</version>        </dependency>        <dependency>            <groupId>com.fasterxml.jackson.datatype</groupId>            <artifactId>jackson-datatype-jsr310</artifactId>            <version>${fasterxml-jackson.version}</version>        </dependency>        <!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->        <dependency>            <groupId>com.auth0</groupId>            <artifactId>java-jwt</artifactId>            <version>3.3.0</version>        </dependency>        <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->        <dependency>            <groupId>io.jsonwebtoken</groupId>            <artifactId>jjwt</artifactId>            <version>0.9.0</version>        </dependency>        <dependency>            <groupId>org.springframework</groupId>            <artifactId>spring-context</artifactId>            <version>${spring.version}</version>        </dependency>        <dependency>            <groupId>org.hibernate</groupId>            <artifactId>hibernate-core</artifactId>            <version>${hibernate.version}</version>        </dependency>        <dependency>            <groupId>org.hibernate</groupId>            <artifactId>hibernate-java8</artifactId>            <version>${hibernate.version}</version>        </dependency>        <dependency>            <groupId>org.hibernate</groupId>            <artifactId>hibernate-entitymanager</artifactId>            <version>${hibernate.version}</version>            <exclusions>                <exclusion>                    <groupId>cglib</groupId>                    <artifactId>cglib</artifactId>                </exclusion>                <exclusion>                    <groupId>dom4j</groupId>                    <artifactId>dom4j</artifactId>                </exclusion>            </exclusions>        </dependency>        <dependency>            <groupId>org.hibernate</groupId>            <artifactId>hibernate-spatial</artifactId>            <version>${hibernate.version}</version>        </dependency>        <dependency>            <groupId>org.hibernate.javax.persistence</groupId>            <artifactId>hibernate-jpa-2.1-api</artifactId>            <version>1.0.0.Final</version>        </dependency>        <dependency>            <groupId>commons-dbcp</groupId>            <artifactId>commons-dbcp</artifactId>            <version>1.4</version>        </dependency>        <dependency>            <groupId>net.postgis</groupId>            <artifactId>postgis-jdbc</artifactId>            <version>2.2.1</version>        </dependency>        <dependency>            <groupId>org.postgresql</groupId>            <artifactId>postgresql</artifactId>            <version>42.1.1</version>        </dependency>        <!-- Logging -->        <dependency>            <groupId>org.slf4j</groupId>            <artifactId>slf4j-api</artifactId>            <version>${org.slf4j-version}</version>        </dependency>        <dependency>            <groupId>org.slf4j</groupId>            <artifactId>jcl-over-slf4j</artifactId>            <version>${org.slf4j-version}</version>            <scope>runtime</scope>        </dependency>        <dependency>            <groupId>io.springfox</groupId>            <artifactId>springfox-swagger2</artifactId>            <version>${swagger.version}</version>        </dependency>        <dependency>            <groupId>io.springfox</groupId>            <artifactId>springfox-bean-validators</artifactId>            <version>${swagger.version}</version>        </dependency>        <dependency>            <groupId>io.springfox</groupId>            <artifactId>springfox-swagger-ui</artifactId>            <version>${swagger.version}</version>        </dependency>        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->        <dependency>            <groupId>org.springframework.security</groupId>            <artifactId>spring-security-config</artifactId>            <version>${spring.version}</version>        </dependency>        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->        <dependency>            <groupId>org.springframework.security</groupId>            <artifactId>spring-security-core</artifactId>            <version>${spring.version}</version>        </dependency>        <dependency>            <groupId>com.amazonaws</groupId>            <artifactId>aws-java-sdk</artifactId>            <version>${aws.sdk.version}</version>        </dependency>        <!--<dependency>-->        <!--<groupId>com.amazonaws</groupId>-->        <!--<artifactId>amazon-sqs-java-messaging-lib</artifactId>-->        <!--<version>${aws.sdk.version}</version>-->        <!--</dependency>-->        <!--Test>        <!- https://mvnrepository.com/artifact/org.mockito/mockito-all -->        <!--mockito-->        <dependency>            <groupId>org.mockito</groupId>            <artifactId>mockito-all</artifactId>            <version>1.10.19</version>            <scope>test</scope>        </dependency>        <dependency>            <groupId>org.powermock</groupId>            <artifactId>powermock-module-junit4</artifactId>            <version>2.0.0-beta.5</version>            <scope>test</scope>        </dependency>        <dependency>            <groupId>org.powermock</groupId>            <artifactId>powermock-api-mockito2</artifactId>            <version>2.0.0-beta.5</version>            <scope>test</scope>        </dependency>        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->        <dependency>            <groupId>org.springframework.security</groupId>            <artifactId>spring-security-web</artifactId>            <version>${spring.version}</version>        </dependency>        <dependency>            <groupId>org.slf4j</groupId>            <artifactId>slf4j-log4j12</artifactId>            <version>${org.slf4j-version}</version>            <scope>runtime</scope>        </dependency>        <dependency>            <groupId>log4j</groupId>            <artifactId>log4j</artifactId>            <version>1.2.15</version>            <exclusions>                <exclusion>                    <groupId>javax.mail</groupId>                    <artifactId>mail</artifactId>                </exclusion>                <exclusion>                    <groupId>javax.jms</groupId>                    <artifactId>jms</artifactId>                </exclusion>                <exclusion>                    <groupId>com.sun.jdmk</groupId>                    <artifactId>jmxtools</artifactId>                </exclusion>                <exclusion>                    <groupId>com.sun.jmx</groupId>                    <artifactId>jmxri</artifactId>                </exclusion>            </exclusions>            <scope>runtime</scope>        </dependency>        <dependency>            <groupId>org.springframework.data</groupId>            <artifactId>spring-data-jpa</artifactId>            <version>2.0.7.RELEASE</version>        </dependency>        <dependency>            <groupId>junit</groupId>            <artifactId>junit</artifactId>            <version>RELEASE</version>            <scope>test</scope>        </dependency>        <dependency>            <groupId>org.mockito</groupId>            <artifactId>mockito-all</artifactId>            <version>2.0.2-beta</version>            <scope>compile</scope>        </dependency>    </dependencies>    <repositories>        <repository>            <id>spring-milestones</id>            <name>Spring Milestones</name>            <url>https://repo.spring.io/libs-milestone</url>            <snapshots>                <enabled>false</enabled>            </snapshots>        </repository>    </repositories></project>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.yishan.javaplus</groupId>
+    <artifactId>javaplus</artifactId>
+    <packaging>jar</packaging>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>javaplus</name>
+    <properties>
+        <java-version>1.8</java-version>
+        <spring.version>5.0.6.RELEASE</spring.version>
+        <org.slf4j-version>1.7.25</org.slf4j-version>
+        <hibernate.version>5.3.7.Final</hibernate.version>
+        <groupId>org.flywaydb</groupId>
+        <artifactId>flyway-maven-plugin</artifactId>
+        <aws.sdk.version>1.11.360</aws.sdk.version>
+        <flyway.version>5.2.1</flyway.version>
+        <fasterxml-jackson.version>2.9.8</fasterxml-jackson.version>
+        <swagger.version>2.9.2</swagger.version>
+        <mockito.version>1.10.19</mockito.version>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.flywaydb</groupId>
+                        <artifactId>flyway-maven-plugin</artifactId>
+                        <version>${flyway.version}</version>
+                        <configuration>
+                            <driver>org.postgresql.Driver</driver>
+                            <url>jdbc:postgresql://localhost:5432/dev</url>
+                            <user>yishan</user>
+                            <password>JZM1926</password>
+                            <locations>
+                                <location>db/migration</location>
+                            </locations>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>unit</id>
+            <build>
+                <plugins>
+                    <!--flyway database migration -->
+                    <plugin>
+                        <groupId>org.flywaydb</groupId>
+                        <artifactId>flyway-maven-plugin</artifactId>
+                        <version>${flyway.version}</version>
+                        <configuration>
+                            <driver>org.postgresql.Driver</driver>
+                            <url>jdbc:postgresql://${db_url}</url>
+                            <user>${db_username}</user>
+                            <password>${db_password}</password>
+                            <locations>
+                                <location>db/migration</location>
+                            </locations>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!--<profile>-->
+            <!--<id>unit</id>-->
+            <!--<build>-->
+                <!--<plugins>-->
+                    <!--<plugin>-->
+                        <!--<groupId>org.flywaydb</groupId>-->
+                        <!--<artifactId>flyway-maven-plugin</artifactId>-->
+                        <!--<version>${flyway.version}</version>-->
+                        <!--<configuration>-->
+                            <!--<driver>org.postgresql.Driver</driver>-->
+                            <!--<url>jdbc:postgresql://localhost:5432/unit</url>-->
+                            <!--<user>yishan</user>-->
+                            <!--<password>JZM1926</password>-->
+                            <!--<locations>-->
+                                <!--<location>db/migration</location>-->
+                            <!--</locations>-->
+                        <!--</configuration>-->
+                    <!--</plugin>-->
+                <!--</plugins>-->
+            <!--</build>-->
+        <!--</profile>-->
+        <profile>
+            <id>test</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.flywaydb</groupId>
+                        <artifactId>flyway-maven-plugin</artifactId>
+                        <version>${flyway.version}</version>
+                        <configuration>
+                            <driver>org.postgresql.Driver</driver>
+                            <url>jdbc:postgresql://localhost:5432/test</url>
+                            <user>yishan</user>
+                            <password>JZM1926</password>
+                            <locations>
+                                <location>db/migration</location>
+                            </locations>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <build>
+        <finalName>javaplus</finalName>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java-version}</source>
+                    <target>${java-version}</target>
+                    <compilerArgument>-Xlint:all</compilerArgument>
+                    <showWarnings>true</showWarnings>
+                    <showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <includes>
+                        <include>**/*Tests.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+            <!--<plugin>-->
+            <!--<groupId>org.flywaydb</groupId>-->
+            <!--<artifactId>flyway-maven-plugin</artifactId>-->
+            <!--<version>${flyway.version}</version>-->
+            <!--<configuration>-->
+            <!--<driver>org.postgresql.Driver</driver>-->
+            <!--<url>jdbc:postgresql://localhost:5432/jp</url>-->
+            <!--<user>yishan</user>-->
+            <!--<password>JZM1926</password>-->
+            <!--<locations>-->
+            <!--<location>db/migration</location>-->
+            <!--</locations>-->
+            <!--</configuration>-->
+            <!--</plugin>-->
+        </plugins>
+
+
+    </build>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${fasterxml-jackson.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${fasterxml-jackson.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${fasterxml-jackson.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.mobile/spring-mobile-device -->
+        <dependency>
+            <groupId>org.springframework.mobile</groupId>
+            <artifactId>spring-mobile-device</artifactId>
+            <version>2.0.0.M3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${fasterxml-jackson.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>3.3.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.0</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-java8</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>cglib</groupId>
+                    <artifactId>cglib</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>dom4j</groupId>
+                    <artifactId>dom4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-spatial</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.1-api</artifactId>
+            <version>1.0.0.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.postgis</groupId>
+            <artifactId>postgis-jdbc</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.1.1</version>
+        </dependency>
+
+        <!-- Logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${org.slf4j-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>${org.slf4j-version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-bean-validators</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk</artifactId>
+            <version>${aws.sdk.version}</version>
+        </dependency>
+
+        <!--<dependency>-->
+        <!--<groupId>com.amazonaws</groupId>-->
+        <!--<artifactId>amazon-sqs-java-messaging-lib</artifactId>-->
+        <!--<version>${aws.sdk.version}</version>-->
+        <!--</dependency>-->
+
+        <!--Test>
+        <!- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
+        <!--mockito-->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.10.19</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.powermock</groupId>-->
+            <!--<artifactId>powermock-module-junit4</artifactId>-->
+            <!--<version>2.0.0-beta.5</version>-->
+            <!--<scope>test</scope>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.powermock</groupId>-->
+            <!--<artifactId>powermock-api-mockito2</artifactId>-->
+            <!--<version>2.0.0-beta.5</version>-->
+            <!--<scope>test</scope>-->
+        <!--</dependency>-->
+
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${org.slf4j-version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.15</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.mail</groupId>
+                    <artifactId>mail</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.jms</groupId>
+                    <artifactId>jms</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.jdmk</groupId>
+                    <artifactId>jmxtools</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.jmx</groupId>
+                    <artifactId>jmxri</artifactId>
+                </exclusion>
+            </exclusions>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>2.0.7.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>2.0.2-beta</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/libs-milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+</project>
