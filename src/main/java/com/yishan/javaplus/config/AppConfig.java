@@ -7,18 +7,13 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.yishan.javaplus.service.StorageService;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
 
-import static javax.swing.plaf.basic.BasicHTML.propertyKey;
 import static org.slf4j.LoggerFactory.getLogger;
 
 @Configuration
@@ -47,10 +42,11 @@ public class AppConfig {
     }
 
     @Bean
-    public StorageService getStorageService(@Autowired @Qualifier("applicationProperties") PropertiesFactoryBean beanFactory) throws IOException {
+    @Profile({"dev","test","prod","staging"})
+    public StorageService getStorageService() throws IOException {
         AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withCredentials(new DefaultAWSCredentialsProviderChain()).build();
         StorageService storageService = new StorageService(s3Client);
-        storageService.setBucket(beanFactory.getObject().getProperty(propertyKey));
+        storageService.setBucket("miparquelot");
         return storageService;
     }
 }
