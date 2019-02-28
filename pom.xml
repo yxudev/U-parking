@@ -9,6 +9,6 @@
 
     <modules>
         <module>garage-mvc</module>
-        <!--<module>worker</module>-->
+        <module>worker</module>
     </modules>
 </project>

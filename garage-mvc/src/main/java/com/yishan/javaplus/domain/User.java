@@ -3,6 +3,7 @@ package com.yishan.javaplus.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.lang.NonNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -27,6 +28,7 @@ public class User implements UserDetails {
     public String lastName;
 
     @Column(name = "email", unique = true)
+    @NonNull
     private String email;
 
     @Column(name = "password")

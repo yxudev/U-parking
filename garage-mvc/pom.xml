@@ -2,10 +2,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.yishan.javaplus</groupId>
-    <artifactId>javaplus</artifactId>
-    <packaging>jar</packaging>
+    <artifactId>javaplus_mvc</artifactId>
+    <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
-    <name>javaplus</name>
+    <name>javaplus_mvc</name>
     <properties>
         <java-version>1.8</java-version>
         <spring.version>5.0.6.RELEASE</spring.version>
