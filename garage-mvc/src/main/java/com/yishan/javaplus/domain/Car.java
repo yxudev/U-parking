@@ -10,11 +10,11 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Table(name = "cars")
 public class Car {
     @Id
-    @GeneratedValue(strategy=SEQUENCE, generator="cars_id_seq")
-    @SequenceGenerator(name="cars_id_seq", sequenceName="cars_id_seq", allocationSize=1)
+    @GeneratedValue(strategy = SEQUENCE, generator = "cars_id_seq")
+    @SequenceGenerator(name = "cars_id_seq", sequenceName = "cars_id_seq", allocationSize = 1)
     private Long id;
 
-    @Column(name = "vin" , unique = true)
+    @Column(name = "vin", unique = true)
     private String vin;
 
     @Column(name = "model")
@@ -24,13 +24,13 @@ public class Car {
     public String bodyType;
 
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "car",cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "car", cascade = CascadeType.ALL)
     private List<ParkingTime> parkingTimes;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "car",cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "car", cascade = CascadeType.ALL)
     private CarImages carImages;
 
-    @OneToOne(fetch = FetchType.LAZY,mappedBy = "car",cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "car", cascade = CascadeType.ALL)
     private Plate plate;
 
     public List<ParkingTime> getParkingTimes() {
