@@ -27,8 +27,8 @@ public class Car {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "car", cascade = CascadeType.ALL)
     private List<ParkingTime> parkingTimes;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "car", cascade = CascadeType.ALL)
-    private CarImages carImages;
+    //@OneToMany(fetch = FetchType.LAZY, mappedBy = "car", cascade = CascadeType.ALL)
+    //private CarImages carImages;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "car", cascade = CascadeType.ALL)
     private Plate plate;

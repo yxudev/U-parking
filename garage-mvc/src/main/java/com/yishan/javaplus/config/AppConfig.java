@@ -4,7 +4,10 @@ package com.yishan.javaplus.config;
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.sqs.AmazonSQS;
+import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import com.yishan.javaplus.service.StorageService;
+import com.yishan.javaplus.service.jms.MessageSQSService;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
@@ -48,5 +51,16 @@ public class AppConfig {
         StorageService storageService = new StorageService(s3Client);
         storageService.setBucket("miparquelot");
         return storageService;
+    }
+
+    @Bean
+    public MessageSQSService getMessageSQSService(){
+        AmazonSQS sqs = AmazonSQSClientBuilder.standard().withCredentials(new DefaultAWSCredentialsProviderChain()).build();
+        MessageSQSService messageSQSService = new MessageSQSService(sqs);
+        return messageSQSService;
+    }
+
+    {
+
     }
 }
