@@ -54,13 +54,12 @@ public class AppConfig {
     }
 
     @Bean
-    public MessageSQSService getMessageSQSService(){
+    @Profile({"dev","test","prod","staging"})
+    public MessageSQSService getMessageSQSService() throws IOException{
         AmazonSQS sqs = AmazonSQSClientBuilder.standard().withCredentials(new DefaultAWSCredentialsProviderChain()).build();
-        MessageSQSService messageSQSService = new MessageSQSService(sqs);
+        MessageSQSService messageSQSService = new MessageSQSService(sqs, "javaplus-dev");
+        messageSQSService.sendMessageRequest("https://sqs.us-east-1.amazonaws.com/930617370896/javaplus-dev");
+        messageSQSService.receiveMessageRequest();
         return messageSQSService;
-    }
-
-    {
-
     }
 }

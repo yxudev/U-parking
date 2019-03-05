@@ -14,6 +14,7 @@
         <groupId>org.flywaydb</groupId>
         <artifactId>flyway-maven-plugin</artifactId>
         <aws.sdk.version>1.11.360</aws.sdk.version>
+        <aws.java.sdk.sqs.version>1.11.510</aws.java.sdk.sqs.version>
         <flyway.version>5.2.1</flyway.version>
         <fasterxml-jackson.version>2.9.8</fasterxml-jackson.version>
         <swagger.version>2.9.2</swagger.version>
@@ -353,6 +354,12 @@
             <version>${spring.version}</version>
         </dependency>
 
+            <dependency>
+                <groupId>com.amazonaws</groupId>
+                <artifactId>aws-java-sdk-sqs</artifactId>
+                <version>${aws.java.sdk.sqs.version}</version>
+            </dependency>
+
 
         <dependency>
             <groupId>com.amazonaws</groupId>
@@ -360,11 +367,12 @@
             <version>${aws.sdk.version}</version>
         </dependency>
 
-        <!--<dependency>-->
-        <!--<groupId>com.amazonaws</groupId>-->
-        <!--<artifactId>amazon-sqs-java-messaging-lib</artifactId>-->
-        <!--<version>${aws.sdk.version}</version>-->
-        <!--</dependency>-->
+        <!-- https://mvnrepository.com/artifact/com.amazonaws/amazon-sqs-java-messaging-lib -->
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>amazon-sqs-java-messaging-lib</artifactId>
+            <version>1.0.4</version>
+        </dependency>
 
         <!--Test>
         <!- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
