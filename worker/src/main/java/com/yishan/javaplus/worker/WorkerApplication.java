@@ -1,10 +1,12 @@
-package com.yishan.javaplus.worker.domain;
+package com.yishan.javaplus.worker;
 
 
+import com.yishan.javaplus.worker.service.MessageSQSService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 import java.util.Arrays;
@@ -13,7 +15,9 @@ import java.util.Arrays;
 public class WorkerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WorkerApplication.class, args);
+		ConfigurableApplicationContext app = SpringApplication.run(WorkerApplication.class, args);
+		MessageSQSService messageSQSService = app.getBean(MessageSQSService.class);
+		messageSQSService.receiveMessage();
 	}
 
 	@Bean
