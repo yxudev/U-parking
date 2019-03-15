@@ -1,32 +1,1 @@
-package com.yishan.javaplus.worker.service;
-
-
-import com.amazonaws.services.sqs.AmazonSQS;
-import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
-import com.amazonaws.services.sqs.model.Message;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-
-@Service
-public class MessageSQSService {
-
-    @Value("${aws.region}")
-    private String region;
-
-    //@Value("#{ applicationProperties['amazon.sqs.url'] }")
-    final String queueName = "javaplus-dev";
-//    private AmazonSQSClient sqs;
-
-    public void receiveMessage(){
-       final AmazonSQS sqs = AmazonSQSClientBuilder.standard().withRegion(region).build();
-        List<Message> messages = sqs.receiveMessage(queueName).getMessages();
-
-        for (Message m : messages) {
-            sqs.deleteMessage(queueName, m.getReceiptHandle());
-        }
-
-
-    }
-}
+package com.yishan.javaplus.worker.service;import com.amazonaws.services.sqs.AmazonSQS;import com.amazonaws.services.sqs.AmazonSQSClientBuilder;import com.amazonaws.services.sqs.model.DeleteMessageRequest;import com.amazonaws.services.sqs.model.Message;import com.amazonaws.services.sqs.model.ReceiveMessageRequest;import org.slf4j.Logger;import org.slf4j.LoggerFactory;import org.springframework.stereotype.Component;import java.util.List;@Componentpublic class MessageSQSService {    private AmazonSQS sqs;    public MessageSQSService(){        sqs= AmazonSQSClientBuilder.standard().withRegion("us-east-1").build();    }    private String queueName = "javaplus";    private final Logger logger = LoggerFactory.getLogger(getClass());    public void receiveMessage(){        logger.info("Trying to receive message from Amazon: " + queueName);        ReceiveMessageRequest receiveMessageRequest = new ReceiveMessageRequest(getQueueUrl(queueName));        receiveMessageRequest.setMaxNumberOfMessages(1);        List<Message> messages = sqs.receiveMessage(receiveMessageRequest).getMessages();        for(Message message: messages){            System.out.println(queueName + "\n Got Messages! \n" + "\n Message ID: \n" + message.getMessageId() + "\n Message Body: \n" + message.getBody() + "\nMessage Attributes \n" + message.getAttributes());        }//        System.out.println("Deleting the test queue.\n");//        sqs.deleteQueue(new DeleteQueueRequest(queueName));//        System.out.println("Queue deleted.\n");        System.out.println("Deleting a message.\n");        final String messageReceiptHandle = messages.get(0).getReceiptHandle();        sqs.deleteMessage(new DeleteMessageRequest(queueName,                messageReceiptHandle));    }    public String getQueueUrl(String queueName){        String queueUrl = sqs.getQueueUrl(queueName).getQueueUrl();        return queueUrl;    }}
