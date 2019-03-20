@@ -11,4 +11,4 @@ create table managers (
     ON UPDATE NO ACTION
 
 );
-ALTER SEQUENCE managers_id_seq OWNED BY users.id;
+ALTER SEQUENCE managers_id_seq OWNED BY managers.id;

@@ -12,4 +12,4 @@ create table plates (
     ON UPDATE NO ACTION
 
 );
-ALTER SEQUENCE plates_id_seq OWNED BY users.id;
+ALTER SEQUENCE plates_id_seq OWNED BY plates.id;

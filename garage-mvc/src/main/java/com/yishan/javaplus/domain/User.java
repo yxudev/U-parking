@@ -41,6 +41,17 @@ public class User implements Serializable, UserDetails {
     @Column(name = "zip_code")
     public String zipCode;
 
+    @Column(name = "acc_locker")
+    public boolean isAccountNonLocked;
+
+    @Column(name = "acc_expired")
+    public boolean isAccountNonExpired;
+
+    @Column(name = "cred_expired")
+    public boolean isCredentialsNonExpired;
+
+    @Column(name = "is_enabled")
+    public boolean isEnabled;
 
     @Transient
     @JsonIgnore
@@ -80,13 +91,40 @@ public class User implements Serializable, UserDetails {
         this.lastName = lastName;
     }
 
+
+
+    @Override
     public boolean isAccountNonLocked(){
         return true;
     }
 
-
+    @Override
     public boolean isAccountNonExpired(){
         return true;
+    }
+
+
+    @Override
+    public boolean isCredentialsNonExpired(){ return true; }
+
+
+    @Override
+    public boolean isEnabled(){ return true; }
+
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        isAccountNonLocked = accountNonLocked;
+    }
+
+    public void setAccountNonExpired(boolean accountNonExpired) {
+        isAccountNonExpired = accountNonExpired;
+    }
+
+    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+        isCredentialsNonExpired = credentialsNonExpired;
+    }
+
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
     }
 
 
@@ -100,9 +138,7 @@ public class User implements Serializable, UserDetails {
         this.authorities = authorities;
     }
 
-    public boolean isCredentialsNonExpired(){return true;}
 
-    public boolean isEnabled(){return true;}
 
     public String getPassword(){
         return this.password;
