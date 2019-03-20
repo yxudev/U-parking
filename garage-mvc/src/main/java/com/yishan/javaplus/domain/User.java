@@ -42,16 +42,20 @@ public class User implements Serializable, UserDetails {
     public String zipCode;
 
     @Column(name = "acc_locker")
-    public boolean isAccountNonLocked;
+    @JsonIgnore
+    public boolean accountLocked=Boolean.FALSE;
 
     @Column(name = "acc_expired")
-    public boolean isAccountNonExpired;
+    @JsonIgnore
+    public boolean accountExpired=Boolean.FALSE;
 
     @Column(name = "cred_expired")
-    public boolean isCredentialsNonExpired;
+    @JsonIgnore
+    public boolean credentialsExpired=Boolean.FALSE;
 
     @Column(name = "is_enabled")
-    public boolean isEnabled;
+    @JsonIgnore
+    public boolean enabled=Boolean.TRUE;
 
     @Transient
     @JsonIgnore
@@ -94,37 +98,41 @@ public class User implements Serializable, UserDetails {
 
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonLocked(){
-        return true;
+        return !accountLocked;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonExpired(){
-        return true;
+        return !accountExpired;
     }
 
 
     @Override
-    public boolean isCredentialsNonExpired(){ return true; }
+    @JsonIgnore
+    public boolean isCredentialsNonExpired(){ return !credentialsExpired; }
 
 
     @Override
-    public boolean isEnabled(){ return true; }
+    @JsonIgnore
+    public boolean isEnabled(){ return enabled; }
 
     public void setAccountNonLocked(boolean accountNonLocked) {
-        isAccountNonLocked = accountNonLocked;
+        accountNonLocked = accountNonLocked;
     }
 
-    public void setAccountNonExpired(boolean accountNonExpired) {
-        isAccountNonExpired = accountNonExpired;
+    public void setAccountNonExpired(boolean accountExpired) {
+        accountExpired = accountExpired;
     }
 
-    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
-        isCredentialsNonExpired = credentialsNonExpired;
+    public void setCredentialsNonExpired(boolean credentialsExpired) {
+        credentialsExpired = credentialsExpired;
     }
 
     public void setEnabled(boolean enabled) {
-        isEnabled = enabled;
+        enabled = enabled;
     }
 
 
