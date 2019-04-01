@@ -14,7 +14,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @ActiveProfiles("unit")
 public class UserRepositoryTest {
     @Autowired
-    private UserRepository userRepository;
+    public UserRepository userRepository;
 
 //    @Test
 //    @Transactional
