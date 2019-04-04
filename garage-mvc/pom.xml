@@ -43,6 +43,12 @@
                 </configuration>
             </plugin>
 
+            <plugin>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-maven-plugin</artifactId>
+            <version>${flyway.version}</version>
+            </plugin>
+
         </plugins>
 
 
