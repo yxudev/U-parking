@@ -15,7 +15,7 @@
         <artifactId>flyway-maven-plugin</artifactId>
         <aws.sdk.version>1.11.360</aws.sdk.version>
         <aws.java.sdk.sqs.version>1.11.510</aws.java.sdk.sqs.version>
-        <flyway.version>5.2.1</flyway.version>
+        <flyway.version>5.2.4</flyway.version>
         <fasterxml-jackson.version>2.9.8</fasterxml-jackson.version>
         <swagger.version>2.9.2</swagger.version>
         <mockito.version>1.10.19</mockito.version>
@@ -150,7 +150,7 @@
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
-            <version>5.2.4</version>
+            <version>${flyway.version}</version>
         </dependency>
 
 
