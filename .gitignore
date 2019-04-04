@@ -52,11 +52,12 @@ hs_err_pid*
 ######################
 *.log
 *.sqlite
-application-dev.properties
-application-unit.properties
-application-test.properties
+prod-db.properties
+test-db.properties
+unit-db.properties
 uploadconfig.sh
-log4j.properties
+dev-db.properties
+!log4j.properties
 shared.properties
 out/
 target/
