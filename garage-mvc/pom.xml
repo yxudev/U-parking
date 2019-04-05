@@ -42,12 +42,20 @@
                     </includes>
                 </configuration>
             </plugin>
-
-            <plugin>
+        <plugin>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-maven-plugin</artifactId>
             <version>${flyway.version}</version>
-            </plugin>
+            <configuration>
+                <driver>org.postgresql.Driver</driver>
+                <url>jdbc:postgresql://${db_url}</url>
+                <user>${db_username}</user>
+                <password>${db_password}</password>
+                <locations>
+                    <location>db/migration</location>
+                </locations>
+            </configuration>
+        </plugin>
 
         </plugins>
 
