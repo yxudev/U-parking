@@ -4,11 +4,26 @@ import com.yishan.javaplus.domain.Car;
 import com.yishan.javaplus.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class CarService {
+
+    @Transactional
+    public Car createNewCar(Car newCar) {
+        String code = UUID.randomUUID().toString();
+        save(newCar);
+        return newCar;
+    }
+    public String carID = UUID.randomUUID().toString();
+
+    public Car addCar() {
+        return new Car();
+    }
+
     @Autowired
     private CarRepository carRepository;
 
@@ -39,5 +54,9 @@ public class CarService {
 
     public Car save(Car car) {
         return carRepository.save(car);
+    }
+
+    public void deleteById(Long aLong) {
+        carRepository.deleteById(aLong);
     }
 }

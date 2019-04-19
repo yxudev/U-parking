@@ -17,6 +17,14 @@ public class Car {
     @Column(name = "vin", unique = true)
     private String vin;
 
+    public Car(String vin, String model, String bodyType, List<ParkingTime> parkingTimes, Plate plate) {
+        this.vin = vin;
+        this.model = model;
+        this.bodyType = bodyType;
+        this.parkingTimes = parkingTimes;
+        this.plate = plate;
+    }
+
     @Column(name = "model")
     public String model;
 
@@ -32,6 +40,10 @@ public class Car {
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "car", cascade = CascadeType.ALL)
     private Plate plate;
+
+    public Car() {
+
+    }
 
     public List<ParkingTime> getParkingTimes() {
         return parkingTimes;
@@ -65,4 +77,19 @@ public class Car {
         this.bodyType = bodyType;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setParkingTimes(List<ParkingTime> parkingTimes) {
+        this.parkingTimes = parkingTimes;
+    }
+
+    public Plate getPlate() {
+        return plate;
+    }
+
+    public void setPlate(Plate plate) {
+        this.plate = plate;
+    }
 }

@@ -20,26 +20,20 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
-
-//import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "com.yishan.javaplus.repository")
 public class DSInizler {
-//    protected String databaseUrl = "jdbc:postgresql://localhost:5432/jp";
-//    protected String databaseUserName = "yishan";
-//    protected String databasePassword = "JZM1926";
-//    protected String driverClassName = "org.postgresql.ds.PGSimpleDataSource";
 
     @Autowired
     private Environment environment;
-    @Value("#{ applicationProperties['database.serverName']}")
+    @Value("${database.serverName}")
     protected String databaseUrl;
-    @Value("#{ applicationProperties['database.username']}")
+    @Value("${database.username}")
     protected String databaseUserName = "";
-    @Value("#{ applicationProperties['database.password']}")
+    @Value("${database.password}")
     protected String databasePassword = "";
-    @Value("#{ applicationProperties['database.dataSourceClassName']}")
+    @Value("#{shareProperties['database.dataSourceClassName']}")
     protected String driverClassName;
 
     @Bean(name= "dataSource")
@@ -58,7 +52,6 @@ public class DSInizler {
         dataSource.setUrl(databaseUrl);
         dataSource.setUsername(databaseUserName);
         dataSource.setPassword(databasePassword);
-//        dataSource.setValidationQuery(databaseValidationQuery);
         dataSource.setTestOnBorrow(true);
         dataSource.setTestOnReturn(true);
         dataSource.setTestWhileIdle(true);
@@ -71,23 +64,15 @@ public class DSInizler {
     @Profile({"dev","test","state","prod"})
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
-
         factoryBean.setDataSource(getDataSource());
         factoryBean.setPackagesToScan(new String[] { "com.yishan.javaplus.domain","com.yishan.javaplus.repository" });
         factoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
         Properties props = new Properties();
         props.put("hibernate.dialect", "org.hibernate.spatial.dialect.postgis.PostgisDialect");
         props.put("hibernate.hbm2ddl.auto", "validate");
-//        props.put("hibernate.physical_naming_strategy", "com.overture.family.extend.hibernate.ImprovedNamingStrategy")
         props.put("hibernate.connection.charSet","UTF-8");
         props.put("hibernate.show_sql","false");
-//        props.put("")
-
-
-//            <property name="hibernate.ejb.interceptor" value="com.overture.family.repository.jpa.DBNullsFirstLastInteceptor"/>
-
         factoryBean.setJpaProperties(props);
-
         return factoryBean;
     }
 
@@ -95,23 +80,15 @@ public class DSInizler {
     @Profile({"unit"})
     public LocalContainerEntityManagerFactoryBean entityUnitManagerFactoryBean() {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
-
         factoryBean.setDataSource(getDataSource());
         factoryBean.setPackagesToScan(new String[] { "com.yishan.javaplus.domain","com.yishan.javaplus.repository" });
         factoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
         Properties props = new Properties();
         props.put("hibernate.dialect", "org.hibernate.spatial.dialect.postgis.PostgisDialect");
         props.put("hibernate.hbm2ddl.auto", "validate");
-//        props.put("hibernate.physical_naming_strategy", "com.overture.family.extend.hibernate.ImprovedNamingStrategy")
         props.put("hibernate.connection.charSet","UTF-8");
         props.put("hibernate.show_sql","false");
-//        props.put("")
-
-
-//            <property name="hibernate.ejb.interceptor" value="com.overture.family.repository.jpa.DBNullsFirstLastInteceptor"/>
-
         factoryBean.setJpaProperties(props);
-
         return factoryBean;
     }
 

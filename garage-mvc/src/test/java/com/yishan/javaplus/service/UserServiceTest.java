@@ -1,5 +1,6 @@
 package com.yishan.javaplus.service;
 
+
 import com.yishan.javaplus.config.AppConfig;
 import com.yishan.javaplus.domain.User;
 import com.yishan.javaplus.repository.UserRepository;
@@ -25,31 +26,15 @@ public class UserServiceTest {
     @Autowired
     private UserRepository userRepository;
 
-//    @Test
-//    @Transactional
-//    public void findByIdTest() {
-//        User u = new User();
-//        u.setUsername("Admin");
-//        u.setEmail("gmail@gmail.com");
-//        u.setFirstName("sa");
-//        u.setLastName("bi");
-//        userRepository.save(u);
-//        Optional<User> testUser = userRepository.findById(u.getId());
-//        assertNotNull(testUser);
-//        assertEquals(u.getId(), testUser.get().getId());
-//    }
-
     @Test
     @Transactional
-    public void createNewUserTest() {
-        User u = new User();
-        u.setUsername("Admin");
-        u.setEmail("gmail@gmail.com");
-        u.setFirstName("sa");
-        u.setLastName("bi");
-        userRepository.save(u);
-        Optional<User> testUser = userRepository.findById(u.getId());
+    public void findByIdTest() {
+        User user = new User();
+        user.setFirstName("Tesla");
+        user.setLastName("Nicola");
+        userRepository.save(user);
+        Optional<User> testUser = userRepository.findById(user.getId());
         assertNotNull(testUser);
-        assertEquals(u.getId(), testUser.get().getId());
+        assertEquals(user.getId(), testUser.get().getId());
     }
 }
