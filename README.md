@@ -9,7 +9,7 @@ This SpringMVC microservice is driven using Maven. To download and run locally s
 
 > git clone https://github.com/yxu1234/javaplus.git
 
-To run this project, **_Docker is highly recommended_**! ~~Otherwise, good luck!~~
+To run this project, **_Docker is highly recommended_**!
 
 If you choose Docker, to make sure the program running smoothly, please use docker maven and select the 3.6-jdk-8 version(`jdk-8/Dockerfile`).
 
@@ -71,3 +71,5 @@ You can now run your dockerized microservice with the following command:
 
 ## History
 Originally created by _Yishan_ on 2019-04-01.
+Updated by _Yishan_ on 2019-04-26. 
+All rights reserved.
