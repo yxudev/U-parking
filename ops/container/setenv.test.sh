@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 export CATALINA_OPTS="$CATALINA_OPTS -ea"
 export CATALINA_OPTS="$CATALINA_OPTS -Xms1g"
-export CATALINA_OPTS="$CATALINA_OPTS -Dspring.profiles.active=test"
+export CATALINA_OPTS="$CATALINA_OPTS -Dspring.profiles.active=${PROFILES}"
+export CATALINA_OPTS="$CATALINA_OPTS -Ddatabase.serverName=jdbc:postgresql://${DB_SERVERNAME}"
+export CATALINA_OPTS="$CATALINA_OPTS -Ddatabase.username=${DB_USERNAME}"
+export CATALINA_OPTS="$CATALINA_OPTS -Ddatabase.password=${DB_PASSWORD}"
+export CATALINA_OPTS="$CATALINA_OPTS -Ddatabase.dataSourceClassName=org.postgresql.ds.PGSimpleDataSource"
+export CATALINA_OPTS="$CATALINA_OPTS -Daws.accessKeyId=AKIAJCH5SRAWOAVLLVRA"
+export CATALINA_OPTS="$CATALINA_OPTS -Daws.secretKey=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"
 export CATALINA_OPTS="$CATALINA_OPTS -Daws.region=us-east-1"

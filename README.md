@@ -1,11 +1,11 @@
-Created by Yishan, version 1.0
+Created by Yishan, version 1.1
 
 Uparking-Microservice
 =======================
 A simple SpringMVC Rest project
 
 ## To run locally
-This SpringMVC microservice is driven using Maven. To download and run locally simply execute the following from the command line:
+This SpringMVC micro-service is driven using Maven. To download and run locally simply execute the following from the command line:
 
 > git clone https://github.com/yxu1234/javaplus.git
 
@@ -52,24 +52,38 @@ Now we have built the necessary artifacts, the next step is to build our docker 
 > MAINTAINER Yishan Xu
   ARG APP_ENV=test
   ENV APP_ENV ${APP_ENV}
-
+  
+> ENV PROFILES=${PROFILES}
+  ENV DB_SERVERNAME=${SERVERNAME}
+  ENV DB_USERNAME=${USERNAME}
+  ENV DB_PASSWORD=${PASSWORD}
+ 
 > EXPOSE 8080
 
 > RUN rm -rf /usr/local/tomcat/webapps/ROOT
   COPY ./*.war /usr/local/tomcat/webapps/ROOT.war
   COPY ./setenv.${APP_ENV}.sh /usr/local/tomcat/bin/setenv.sh
 
-You can now run your dockerized microservice with the following command:
+You can now run your dockerized micro-service with the following command:
 
-> cp ./garage-mvc/target/*.war ./ops/container/
-> cd ./ops/container/
-> docker build -t garage-mvc -f Dockerfile_mvc .
-> rm *.war
+> cp ../../garage-mvc/target/*.war ./
+  docker build -t garage-mvc -f Dockerfile_mvc .
+  rm *.war
 
 #start container
-> docker run garage-mvc
+> docker run --name garage-mvc -e PROFILES=${profiles} -e DB_SERVERNAME=${jdbc:postgresql://databaseUrl:databasePort/databaseName} -e DB_USERNAME=${username} -e DB_PASSWORD=${password} -e AWS_REGION=us-east-1  -p 8080:8080 garage-mvc
+
+#Demo
+`1. Health Check:
+`
+in terminal type in: curl http://localhost:8080/api/msg
+
+it should return as following:
+> {
+>   ""
+> }
 
 ## History
 Originally created by _Yishan_ on 2019-04-01.
-Updated by _Yishan_ on 2019-04-26. 
+Updated by _Yishan_ on 2019-05-06. 
 All rights reserved.

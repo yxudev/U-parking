@@ -61,7 +61,7 @@ public class DSInizler {
         return dataSource;
     }
     @Bean(name="entityManagerFactory")
-    @Profile({"dev","test","state","prod"})
+    @Profile({"dev","test","staging","prod"})
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(getDataSource());
