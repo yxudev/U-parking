@@ -80,7 +80,7 @@ in terminal type in: curl http://localhost:8080/api/msg
 
 it should return as following:
 > {
->   ""
+>   "This application is running okay! "
 > }
 
 ## History
