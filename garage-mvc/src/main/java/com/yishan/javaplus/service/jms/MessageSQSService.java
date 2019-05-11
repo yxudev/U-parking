@@ -32,8 +32,8 @@ public class MessageSQSService {
         sqs.sendMessage(send_msg_request);
     }
 
-//    public void receiveMessageRequest() {
-//        String queueUrl = sqs.getQueueUrl(queueName).getQueueUrl();
-//        List<Message> receivedMessages = sqs.receiveMessage(queueUrl).getMessages();
-//    }
+    public void receiveMessageRequest() {
+        String queueUrl = sqs.getQueueUrl(queueName).getQueueUrl();
+        List<Message> receivedMessages = sqs.receiveMessage(queueUrl).getMessages();
+    }
 }
