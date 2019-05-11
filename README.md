@@ -49,9 +49,7 @@ Now we have built the necessary artifacts, the next step is to build our docker 
 
 The details can be found in **Dockerfile_mvc**
 
-You can now run your dockerized micro-service with the following command:
-
-I've added a script in **ops** folder which helps to simplify the building process. 
+You can now run your dockerized micro-service by clicking the script I've added in **ops** folder which helps to simplify the building process. 
 
 #start container
 ```docker run --name garage-mvc -e PROFILES=${profiles} -e DB_SERVERNAME=${databaseUrl:databasePort/databaseName} -e DB_USERNAME=${username} -e DB_PASSWORD=${password} -e AWS_REGION=us-east-1  -p 8080:8080 garage-mvc```
