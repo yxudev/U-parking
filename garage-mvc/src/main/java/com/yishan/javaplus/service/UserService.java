@@ -5,6 +5,8 @@ import com.yishan.javaplus.domain.User;
 import com.yishan.javaplus.enumdef.AuthorityRole;
 import com.yishan.javaplus.repository.AuthorityRepository;
 import com.yishan.javaplus.repository.UserRepository;
+import com.yishan.javaplus.service.jms.MessageSQSService;
+import org.geolatte.geom.M;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,20 +16,19 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-    public class UserService {
+    public class UserService{
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
     private AuthorityRepository authorityRepository;
 
+    @Autowired
+    private MessageSQSService messageSQSService;
+
+
 //    @Override
 //    protected CrudRepository<User, Long> getCrudRepository(){return userRepository;}
-
-//    @Transactional
-//    public User createUser(User newUser){
-//
-//    }
 
 
 
@@ -77,9 +78,14 @@ import java.util.UUID;
         String encodePassword = encoder.encode(newUser.getPassword());
         newUser.setPassword(encodePassword);
         save(newUser);
+        messageSQSService.sendMessageRequest("xxx");
         addAuthority(newUser, AuthorityRole.ROLE_REGISTERED_USER);
         save(newUser);
         return newUser;
+
+
+
+
     }
 
 }

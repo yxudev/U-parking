@@ -12,29 +12,28 @@ public class MessageSQSService {
     private AmazonSQS sqs;
 
     private String queueUrl;
+    private String queueName;
 
     public MessageSQSService(AmazonSQS sqs, String queueName) {
         this.sqs = sqs;
-        CreateQueueRequest createQueueRequest =
-                new CreateQueueRequest(queueName);
+        this.queueName = queueName;
+        CreateQueueRequest createQueueRequest = new CreateQueueRequest(queueName);
         queueUrl = sqs.createQueue(createQueueRequest)
-                .getQueueUrl();
+                      .getQueueUrl();
 
     }
 
     public void sendMessageRequest(String msg) {
-        SendMessageRequest req = new SendMessageRequest(queueUrl, msg);
-        req.setDelaySeconds(5);
-        sqs.sendMessage(req);
-
-//        SendMessageRequest send_msg_request = new SendMessageRequest()
-//                .withQueueUrl(queueUrl)
-//                .withMessageBody(message)
-//                .withDelaySeconds(time);
-//        sqs.sendMessage(send_msg_request);
+        String queueUrl = sqs.getQueueUrl(queueName).getQueueUrl();
+        SendMessageRequest send_msg_request = new SendMessageRequest()
+                .withQueueUrl(queueUrl)
+                .withMessageBody(msg)
+                .withDelaySeconds(5);
+        sqs.sendMessage(send_msg_request);
     }
 
     public void receiveMessageRequest() {
+        String queueUrl = sqs.getQueueUrl(queueName).getQueueUrl();
         List<Message> receivedMessages = sqs.receiveMessage(queueUrl).getMessages();
     }
 }

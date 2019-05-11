@@ -30,8 +30,8 @@ public class UserServiceTest {
     @Transactional
     public void findByIdTest() {
         User user = new User();
-        user.setFirstName("Tesla");
-        user.setLastName("Nicola");
+        user.setFirstName("anon");
+        user.setLastName("lolllll");
         userRepository.save(user);
         Optional<User> testUser = userRepository.findById(user.getId());
         assertNotNull(testUser);
