@@ -38,7 +38,7 @@ Schema migration for creating tables in database for ${databaseName} environment
 
 ## To run tests
 Use the following command to execute the tests using Maven:
-```mvn test -Dspring.profiles.active=${databaseName} -Ddatabase.serverName=${databaseUrl:databasePort/databaseName} -Ddatabase.username=${username} -Ddatabase.password=${password} -Ddatabase.dataSourceClassName=org.postgresql.ds.PGSimpleDataSource -Daws.accessKeyId=${IAM ID from AWS} -Daws.secretKey=${IAM key from AWS} -Daws.region=us-east-1```
+```mvn test -Dspring.profiles.active=${databaseName} -Ddatabase.serverName=${databaseUrl:databasePort/databaseName} -Ddatabase.username=${username} -Ddatabase.password=${password} -Ddatabase.dataSourceClassName=org.postgresql.ds.PGSimpleDataSource -Daws.accessKeyId=${IAM ID from AWS} -Daws.secretKey=${IAM key from AWS} -Daws.queueName=${queueName} -Daws.region=us-east-1```
 
 ## To run inside a docker container
 We can build, pacakge and run this microservice using Docker right out of the box. First we build the microservice locally by executing the following Maven command:
