@@ -34,11 +34,11 @@ To create localhost databases for unit tests, just type:
 ##### Schema migration
 
 Schema migration for creating tables in database for ${databaseName} environment on garage-mvc folder:
-```mvn clean compile flyway:migrate -Dspring.profiles.active=${databaseName} -Ddatabase.serverName=${jdbc:postgresql://databaseUrl:databasePort/databaseName} -Ddatabase.username=${username} -Ddatabase.password=${password}```
+```mvn clean compile flyway:migrate -Dspring.profiles.active=${databaseName} -Ddatabase.serverName=${databaseUrl:databasePort/databaseName} -Ddatabase.username=${username} -Ddatabase.password=${password}```
 
 ## To run tests
 Use the following command to execute the tests using Maven:
-```mvn test -Dspring.profiles.active=${databaseName} -Ddatabase.serverName=${jdbc:postgresql://databaseUrl:databasePort/databaseName} -Ddatabase.username=${username} -Ddatabase.password=${password} -Ddatabase.dataSourceClassName=org.postgresql.ds.PGSimpleDataSource -Daws.accessKeyId=${IAM ID from AWS} -Daws.secretKey=${IAM key from AWS} -Daws.region=us-east-1```
+```mvn test -Dspring.profiles.active=${databaseName} -Ddatabase.serverName=${databaseUrl:databasePort/databaseName} -Ddatabase.username=${username} -Ddatabase.password=${password} -Ddatabase.dataSourceClassName=org.postgresql.ds.PGSimpleDataSource -Daws.accessKeyId=${IAM ID from AWS} -Daws.secretKey=${IAM key from AWS} -Daws.region=us-east-1```
 
 ## To run inside a docker container
 We can build, pacakge and run this microservice using Docker right out of the box. First we build the microservice locally by executing the following Maven command:
@@ -54,7 +54,7 @@ You can now run your dockerized micro-service with the following command:
 I've added a script in **ops** folder which helps to simplify the building process. 
 
 #start container
-```docker run --name garage-mvc -e PROFILES=${profiles} -e DB_SERVERNAME=${jdbc:postgresql://databaseUrl:databasePort/databaseName} -e DB_USERNAME=${username} -e DB_PASSWORD=${password} -e AWS_REGION=us-east-1  -p 8080:8080 garage-mvc```
+```docker run --name garage-mvc -e PROFILES=${profiles} -e DB_SERVERNAME=${databaseUrl:databasePort/databaseName} -e DB_USERNAME=${username} -e DB_PASSWORD=${password} -e AWS_REGION=us-east-1  -p 8080:8080 garage-mvc```
 
 #Demo
 `1. Health Check:
