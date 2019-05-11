@@ -57,7 +57,7 @@ public class AppConfig {
     @Profile({"dev","test","prod","staging"})
     public MessageSQSService getMessageSQSService() throws IOException{
         AmazonSQS sqs = AmazonSQSClientBuilder.standard().withCredentials(new DefaultAWSCredentialsProviderChain()).build();
-        MessageSQSService messageSQSService = new MessageSQSService(sqs, "javaplus-dev");
+        MessageSQSService messageSQSService = new MessageSQSService(sqs, "${queueName}");
         messageSQSService.sendMessageRequest("https://sqs.us-east-1.amazonaws.com/930617370896/javaplus-dev");
         messageSQSService.receiveMessageRequest();
         return messageSQSService;

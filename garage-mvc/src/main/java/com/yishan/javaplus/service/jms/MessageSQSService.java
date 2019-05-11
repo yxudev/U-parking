@@ -18,8 +18,8 @@ public class MessageSQSService {
         this.sqs = sqs;
         this.queueName = queueName;
         CreateQueueRequest createQueueRequest = new CreateQueueRequest(queueName);
-        queueUrl = sqs.createQueue(createQueueRequest)
-                      .getQueueUrl();
+    //    queueUrl = sqs.createQueue(createQueueRequest)
+    //                  .getQueueUrl();
 
     }
 

@@ -30,8 +30,6 @@ public class UserDetailsServiceImplTest extends UserDetailsServiceImpl{
     @Autowired
     public UserRepository userRepository;
 
-    @Autowired
-    private UserService userService;
 
     @Test
     @Transactional
