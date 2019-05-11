@@ -13,7 +13,7 @@ To run this project, **_Docker is highly recommended_**!
 
 If you choose Docker, to make sure the program running smoothly, please use docker maven and select the 3.6-jdk-8 version(`jdk-8/Dockerfile`).
 
-##### Local env
+### Local env
 
 Use official postgres docker image to create a postgres database server:
 
@@ -28,10 +28,10 @@ To create localhost databases for unit tests, just type:
 
 ```create database u_parking_unit;```
 
-##### Find IP address of container/database 
+### Find IP address of container/database 
 ```docker inspect --format '{{ .NetworkSettings.IPAddress }}' UparkingDemo```
 
-##### Schema migration
+### Schema migration
 
 Schema migration for creating tables in database for ${databaseName} environment on garage-mvc folder:
 ```mvn clean compile flyway:migrate -Dspring.profiles.active=${databaseName} -Ddatabase.serverName=${databaseUrl:databasePort/databaseName} -Ddatabase.username=${username} -Ddatabase.password=${password}```
