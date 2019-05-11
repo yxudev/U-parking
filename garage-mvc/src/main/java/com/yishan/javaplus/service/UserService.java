@@ -23,8 +23,8 @@ import java.util.UUID;
     @Autowired
     private AuthorityRepository authorityRepository;
 
-    @Autowired
-    private MessageSQSService messageSQSService;
+//    @Autowired
+//    private MessageSQSService messageSQSService;
 
 
 //    @Override

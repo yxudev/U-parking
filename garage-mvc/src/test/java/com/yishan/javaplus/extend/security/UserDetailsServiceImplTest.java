@@ -40,7 +40,7 @@ public class UserDetailsServiceImplTest extends UserDetailsServiceImpl{
             uu.setFirstName("dasdsadadsasdadad");
             uu.setPassword("halashdsafals");
             uu.setEmail("j.logan@gmail.com ");
-            uu.setPhoneNumber("123-456-7890");
+            uu.setPhoneNumber("123-456-7899");
             uu.setZipCode("22222");
             userRepository.save(uu);
             UserDetails lalal = userDetailsService.loadUserByUsername(uu.getUsername());
