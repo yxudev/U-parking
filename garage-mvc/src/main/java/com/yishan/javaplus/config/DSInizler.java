@@ -27,7 +27,7 @@ public class DSInizler {
 
     @Autowired
     private Environment environment;
-    @Value("${database.serverName}")
+    @Value("jdbc:postgresql://${database.serverName}")
     protected String databaseUrl;
     @Value("${database.username}")
     protected String databaseUserName = "";
