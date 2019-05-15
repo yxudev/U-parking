@@ -61,8 +61,6 @@ public class User implements Serializable, UserDetails {
     @JsonIgnore
     private Collection<? extends GrantedAuthority> authorities;
 
-
-
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     @Column(name = "date_of_birth")
     protected LocalDate dateOfBirth;
