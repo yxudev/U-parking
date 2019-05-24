@@ -10,6 +10,7 @@ import com.yishan.javaplus.service.StorageService;
 import com.yishan.javaplus.service.jms.MessageSQSService;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
@@ -27,6 +28,8 @@ public class AppConfig {
     @Autowired
     private Environment environment;
     private final Logger logger = getLogger(getClass());
+    @Value("${queueName}")
+    private String queueName;
 
     @Bean(name = "applicationProperties")
     public PropertiesFactoryBean getDbProperties() {
@@ -57,9 +60,7 @@ public class AppConfig {
     @Profile({"dev","test","prod","staging"})
     public MessageSQSService getMessageSQSService() throws IOException{
         AmazonSQS sqs = AmazonSQSClientBuilder.standard().withCredentials(new DefaultAWSCredentialsProviderChain()).build();
-        MessageSQSService messageSQSService = new MessageSQSService(sqs, "${queueName}");
-        messageSQSService.sendMessageRequest("https://sqs.us-east-1.amazonaws.com/930617370896/javaplus-dev");
-        messageSQSService.receiveMessageRequest();
+        MessageSQSService messageSQSService = new MessageSQSService(sqs, queueName);
         return messageSQSService;
     }
 }

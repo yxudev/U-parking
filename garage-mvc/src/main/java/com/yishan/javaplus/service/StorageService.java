@@ -6,12 +6,14 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.S3Object;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.net.URL;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
+@Service
 public class StorageService {
     private AmazonS3 s3;
     private String bucket;

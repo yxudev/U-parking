@@ -17,9 +17,6 @@ import java.util.Map;
 @RequestMapping(value = "/api/misc")
 public class FileCloudController {
 
-    // @Autowired
-    // public ImageService imageService;
-
     private final Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
     private StorageService storageService;
