@@ -60,7 +60,6 @@ public class StorageServiceTest{
 
 
 
-//    static final AmazonS3 s3 = AmazonS3ClientBuilder.defaultClient();
 //    static List<Bucket> buckets = s3.listBuckets();
 //    public static void main(String args[]) {
 //        System.out.println("Your Amazon S3 buckets are:");
