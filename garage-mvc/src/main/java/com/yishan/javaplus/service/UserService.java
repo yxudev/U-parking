@@ -82,10 +82,6 @@ import java.util.UUID;
         addAuthority(newUser, AuthorityRole.ROLE_REGISTERED_USER);
         save(newUser);
         return newUser;
-
-
-
-
     }
 
 }

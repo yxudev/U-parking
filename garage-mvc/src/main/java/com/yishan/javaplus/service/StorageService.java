@@ -5,6 +5,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.S3Object;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ import java.net.URL;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
-@Service
+//@Service
 public class StorageService {
     private AmazonS3 s3;
     private String bucket;
@@ -22,7 +23,7 @@ public class StorageService {
 
     private final Logger logger = getLogger(getClass());
 
-    public StorageService(AmazonS3 s3Client) {
+    public StorageService(@Autowired AmazonS3 s3Client) {
         this.s3 = s3Client;
     }
 
