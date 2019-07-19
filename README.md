@@ -63,6 +63,33 @@ it should return as following:
 > {
 >   "This application is running okay! "
 > }
+`2. User Signup:
+`
+Requestbody:
+`"username":"cai",
+"password":"ss",
+"firstName":"tsai",
+"lastName":"te",
+"email":"tsaite666@gmail.com",
+"zipCode":"66666",
+"phoneNumber":"666-666-6666"
+`
+Responsebody:
+` "user": {
+        "id": 1,
+        "firstName": "tsai",
+        "lastName": "te",
+        "email": "tsaite666@gmail.com",
+        "password": "$2a$10$e66RdsBKZfZkIDTcUP9YMOUJjfroKNMEiT9UtoCTdRhQBlzK4woDC",
+        "username": "cai",
+        "zipCode": "66666",
+        "dateOfBirth": null,
+        "phoneNumber": "666-666-6666"
+    }
+`
+Postman snapshoot
+POST http://localhost:8080/api/users/signup
+![image](https://github.com/yxudev/U-parking/blob/fe/ops/pics/signup.png)
 
 ## History
 Originally created by _Yishan_ on 2019-04-01.
