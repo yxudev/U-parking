@@ -63,9 +63,13 @@ it should return as following:
 > {
 >   "This application is running okay! "
 > }
+
+
 `2. User Signup:
 `
+
 Requestbody:
+
 `"username":"cai",
 "password":"ss",
 "firstName":"tsai",
@@ -74,7 +78,9 @@ Requestbody:
 "zipCode":"66666",
 "phoneNumber":"666-666-6666"
 `
+
 Responsebody:
+
 ` "user": {
         "id": 1,
         "firstName": "tsai",
@@ -87,8 +93,11 @@ Responsebody:
         "phoneNumber": "666-666-6666"
     }
 `
-Postman snapshoot
-POST http://localhost:8080/api/users/signup
+
+## Postman snapshot
+
+`POST http://localhost:8080/api/users/signup`
+
 ![image](https://github.com/yxudev/U-parking/blob/fe/ops/pics/signup.png)
 
 ## History
