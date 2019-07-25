@@ -1,7 +1,10 @@
 package com.yishan.javaplus.service;
 
 import com.yishan.javaplus.config.AppConfig;
+import com.yishan.javaplus.config.AppConfig;
 import com.yishan.javaplus.domain.Car;
+import com.yishan.javaplus.domain.Plate;
+import com.yishan.javaplus.domain.User;
 import com.yishan.javaplus.repository.CarRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,5 +38,22 @@ public class CarServiceTest {
         Optional<Car> testCar = carRepository.findById(c.getId());
         assertNotNull(testCar);
         assertEquals(c.getId(), testCar.get().getId());
+    }
+
+    @Test
+    @Transactional
+    public void findByIdWithPlateTest() {
+        Car car = new Car();
+        car.setVin("83497158973198");
+        car.setModel("BMV");
+        car.setBodyType("SUV");
+
+        Plate plate = new Plate();
+        plate.setState("VA");
+        plate.setLicenseNumber("123va");
+        carRepository.save(car);
+        Optional<Car> testCar = carRepository.findByIdWithPlate(car.getId());
+        assertNotNull(testCar);
+        assertEquals(car.getPlate(), testCar.get().getPlate());
     }
 }

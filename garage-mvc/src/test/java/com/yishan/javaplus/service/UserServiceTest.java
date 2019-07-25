@@ -37,4 +37,5 @@ public class UserServiceTest {
         assertNotNull(testUser);
         assertEquals(user.getId(), testUser.get().getId());
     }
+
 }
