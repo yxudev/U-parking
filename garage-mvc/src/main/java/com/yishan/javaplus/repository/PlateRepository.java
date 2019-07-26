@@ -1,6 +1,5 @@
 package com.yishan.javaplus.repository;
 
-import com.yishan.javaplus.domain.Car;
 import com.yishan.javaplus.domain.Plate;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -10,7 +9,6 @@ import java.util.List;
 public interface PlateRepository extends CrudRepository<Plate, Long> {
 
     List<Plate> findAll();
-    Plate save(String plate);
 
 //    @Query("Select p FROM plates LEFT JOIN FETCH plates.images")
 //    List<String> findAllWithImage();

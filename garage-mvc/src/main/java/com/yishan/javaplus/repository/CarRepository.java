@@ -23,5 +23,10 @@ public interface CarRepository extends CrudRepository<Car, Long> {
 
     @Query("Select c FROM Car c LEFT JOIN FETCH c.plate where c.id = ?1")
     Car findByIdWithPlate(Long carId);
+
+    @Query("Select c FROM Car c LEFT JOIN FETCH c.parkingTimes where c.id = ?1")
+    Car findByIdWithParkingTime(Long carId);
+
+
 }
 

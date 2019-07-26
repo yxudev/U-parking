@@ -9,23 +9,25 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Table(name = "time_duration")
 public class ParkingTime {
     @Id
-//    @GeneratedValue(strategy=SEQUENCE, generator="parking_time_id_seq")
-//    @SequenceGenerator(name="parking_time_id_seq", sequenceName="parking_time_id_seq", allocationSize=1)
-    @GeneratedValue(strategy=SEQUENCE, generator="time_duration_id_seq")
-    @SequenceGenerator(name="time_duration_id_seq", sequenceName="time_duration_id_seq", allocationSize=1)
+    @GeneratedValue(strategy = SEQUENCE, generator = "time_duration_id_seq")
+    @SequenceGenerator(name = "time_duration_id_seq", sequenceName = "time_duration_id_seq", allocationSize = 1)
     private Long id;
 
     @Column(name = "parking_min")
-    public String min;
+    public int min;
 
     @Column(name = "parking_days")
-    private String days;
+    private int days;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "car_id")
     private Car car;
 
-    public ParkingTime(Long id){
+    public ParkingTime(){
+
+    }
+
+    public ParkingTime(Long id) {
         this.id = id;
     }
 
@@ -33,17 +35,19 @@ public class ParkingTime {
         return id;
     }
 
-    public String getMin(){
+    public int getMin() {
         return this.min;
     }
-    public void setMin(String min){
+
+    public void setMin(int min) {
         this.min = min;
     }
 
-    public String  getDays(){
+    public int getDays() {
         return this.days;
     }
-    public void setDays(String days){
+
+    public void setDays(int days) {
         this.days = days;
     }
 

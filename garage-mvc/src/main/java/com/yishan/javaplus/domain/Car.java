@@ -1,6 +1,5 @@
 package com.yishan.javaplus.domain;
 
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -17,13 +16,13 @@ public class Car {
     @Column(name = "vin", unique = true)
     private String vin;
 
-    public Car(String vin, String model, String bodyType, List<ParkingTime> parkingTimes, Plate plate) {
-        this.vin = vin;
-        this.model = model;
-        this.bodyType = bodyType;
-        this.parkingTimes = parkingTimes;
-        this.plate = plate;
-    }
+//    public Car(String vin, String model, String bodyType, List<ParkingTime> parkingTimes, Plate plate) {
+//        this.vin = vin;
+//        this.model = model;
+//        this.bodyType = bodyType;
+//        this.parkingTimes = parkingTimes;
+//        this.plate = plate;
+//    }
 
     @Column(name = "model")
     public String model;

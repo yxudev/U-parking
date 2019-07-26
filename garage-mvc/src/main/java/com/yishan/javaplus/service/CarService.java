@@ -12,6 +12,10 @@ import java.util.UUID;
 @Service
 public class CarService {
 
+    @Autowired
+    private CarRepository carRepository;
+
+
     @Transactional
     public Car createNewCar(Car newCar) {
         String code = UUID.randomUUID().toString();
@@ -24,15 +28,12 @@ public class CarService {
         return new Car();
     }
 
-    @Autowired
-    private CarRepository carRepository;
 
     public CarService() {
 
     }
 
     public List<Car> findAll() {
-        // List<Car> cars = Lists.newArrayList(carRepository.findAll());
         return carRepository.findAll();
     }
 

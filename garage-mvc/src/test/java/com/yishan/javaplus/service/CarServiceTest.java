@@ -1,13 +1,12 @@
 package com.yishan.javaplus.service;
 
 import com.yishan.javaplus.config.AppConfig;
-import com.yishan.javaplus.config.AppConfig;
 import com.yishan.javaplus.domain.Car;
+import com.yishan.javaplus.domain.ParkingTime;
 import com.yishan.javaplus.domain.Plate;
-import com.yishan.javaplus.domain.User;
 import com.yishan.javaplus.repository.CarRepository;
 import com.yishan.javaplus.repository.PlateRepository;
-import org.checkerframework.checker.units.qual.A;
+import com.yishan.javaplus.repository.ParkingTimeRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +31,8 @@ public class CarServiceTest {
     private CarRepository carRepository;
     @Autowired
     private PlateRepository plateRepository;
+    @Autowired
+    private ParkingTimeRepository parkingTimeRepository;
 
     @Autowired
     private EntityManager em;
@@ -42,9 +43,12 @@ public class CarServiceTest {
         Car c = new Car();
         c.setModel("Tesla");
         c.setBodyType("sedan");
-        Optional<Car> testCar = carRepository.findById(c.getId());
-        assertNotNull(testCar);
-        assertEquals(c.getId(), testCar.get().getId());
+        carRepository.save(c);
+//        em.flush();
+//        em.refresh(c);
+        Optional<Car> testCa = carRepository.findById(c.getId());
+        assertNotNull(testCa);
+        assertEquals(c.getId(), testCa.get().getId());
     }
 
     @Test
@@ -66,5 +70,31 @@ public class CarServiceTest {
         em.refresh(testCar);
         assertNotNull(testCar);
         assertEquals(plate, testCar.getPlate());
+    }
+
+    @Test
+    @Transactional
+    public void findByIdWithParkingTimeTest() {
+        Car cc = new Car();
+        cc.setVin("8934758918");
+        cc.setModel("Benz");
+        cc.setBodyType("sedan");
+        Plate pp = new Plate();
+        pp.setState("DC");
+        pp.setLicenseNumber("666");
+        ParkingTime pt = new ParkingTime();
+        pt.setCar(cc);
+        pt.setDays(1);
+        pt.setMin(66);
+        carRepository.save(cc);
+        plateRepository.save(pp);
+        parkingTimeRepository.save(pt);
+        em.flush();
+        em.refresh(cc);
+        Car testCc = carRepository.findByIdWithParkingTime(cc.getId());
+        em.refresh(testCc);
+        assertNotNull(testCc);
+        assertEquals(pt, testCc.getParkingTimes());
+
     }
 }
