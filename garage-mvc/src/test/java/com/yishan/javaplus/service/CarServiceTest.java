@@ -6,6 +6,8 @@ import com.yishan.javaplus.domain.Car;
 import com.yishan.javaplus.domain.Plate;
 import com.yishan.javaplus.domain.User;
 import com.yishan.javaplus.repository.CarRepository;
+import com.yishan.javaplus.repository.PlateRepository;
+import org.checkerframework.checker.units.qual.A;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
 import java.util.Optional;
 
 import static junit.framework.TestCase.assertEquals;
@@ -27,6 +30,11 @@ import static junit.framework.TestCase.assertNotNull;
 public class CarServiceTest {
     @Autowired
     private CarRepository carRepository;
+    @Autowired
+    private PlateRepository plateRepository;
+
+    @Autowired
+    private EntityManager em;
 
     @Test
     @Transactional
@@ -34,7 +42,6 @@ public class CarServiceTest {
         Car c = new Car();
         c.setModel("Tesla");
         c.setBodyType("sedan");
-        carRepository.save(c);
         Optional<Car> testCar = carRepository.findById(c.getId());
         assertNotNull(testCar);
         assertEquals(c.getId(), testCar.get().getId());
@@ -47,13 +54,17 @@ public class CarServiceTest {
         car.setVin("83497158973198");
         car.setModel("BMV");
         car.setBodyType("SUV");
-
         Plate plate = new Plate();
+        plate.setCar(car);
         plate.setState("VA");
         plate.setLicenseNumber("123va");
         carRepository.save(car);
-        Optional<Car> testCar = carRepository.findByIdWithPlate(car.getId());
+        plateRepository.save(plate);
+        em.flush();
+        em.refresh(car);
+        Car testCar = carRepository.findByIdWithPlate(car.getId());
+        em.refresh(testCar);
         assertNotNull(testCar);
-        assertEquals(car.getPlate(), testCar.get().getPlate());
+        assertEquals(plate, testCar.getPlate());
     }
 }

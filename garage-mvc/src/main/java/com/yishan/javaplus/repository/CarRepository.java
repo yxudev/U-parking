@@ -22,6 +22,6 @@ public interface CarRepository extends CrudRepository<Car, Long> {
 
 
     @Query("Select c FROM Car c LEFT JOIN FETCH c.plate where c.id = ?1")
-    Optional<Car> findByIdWithPlate(Long carId);
+    Car findByIdWithPlate(Long carId);
 }
 

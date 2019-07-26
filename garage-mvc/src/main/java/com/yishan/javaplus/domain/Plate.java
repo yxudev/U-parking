@@ -3,10 +3,15 @@ package com.yishan.javaplus.domain;
 
 import javax.persistence.*;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+
 @Entity
 @Table(name = "plates")
 public class Plate {
+
     @Id
+    @GeneratedValue(strategy = SEQUENCE, generator = "cars_id_seq")
+    @SequenceGenerator(name = "cars_id_seq", sequenceName = "cars_id_seq", allocationSize = 1)
     private Long id;
 
     @Column(name = "license_number")
@@ -44,6 +49,18 @@ public class Plate {
 
     public void setState(String state){
         this.state = state;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
     }
 }
 
