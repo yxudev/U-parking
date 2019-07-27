@@ -40,6 +40,9 @@ public class Car {
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "car", cascade = CascadeType.ALL)
     private Plate plate;
 
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "car", cascade = CascadeType.ALL)
+    private Garage garage;
+
     public Car() {
 
     }

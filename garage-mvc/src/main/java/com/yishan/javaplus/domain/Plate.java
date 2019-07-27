@@ -25,10 +25,6 @@ public class Plate {
     @JoinColumn(name = "car_id")
     private Car car;
 
-//    @OneToMany(fetch = FetchType.LAZY,mappedBy = "time_duration",cascade = CascadeType.ALL)
-//    private List<ParkingTime> parkingTimes;
-//
-
     public Plate() { }
 
     public Long getId() {

@@ -1,5 +1,7 @@
 package com.yishan.javaplus.repository;
 
+import com.amazonaws.services.iot.model.CACertificate;
+import com.amazonaws.services.storagegateway.model.CancelArchivalRequest;
 import com.yishan.javaplus.domain.Car;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -27,6 +29,8 @@ public interface CarRepository extends CrudRepository<Car, Long> {
     @Query("Select c FROM Car c LEFT JOIN FETCH c.parkingTimes where c.id = ?1")
     Car findByIdWithParkingTime(Long carId);
 
+    @Query("Select c FROM Car c LEFT JOIN FETCH c.garage where c.id = ?1")
+    Car findByIdWithGarage(Long carId);
 
 }
 

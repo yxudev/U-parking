@@ -15,7 +15,7 @@ public class Garage {
     private Long id;
 
     @Column(name = "lot_number")
-    private String lotNumber;
+    private int lotNumber;
 
     @Column(name = "city")
     public String city;
@@ -24,14 +24,19 @@ public class Garage {
     public String  garageName;
 
 
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "car_id")
+    private Car car;
+
+
     public Garage(){
 
     }
     public Long getId() { return id; }
-    public String getLotNumber(){
+    public int getLotNumber(){
         return this.lotNumber;
     }
-    public void setLotNumber(String lotNumber){
+    public void setLotNumber(int lotNumber){
         this.lotNumber = lotNumber;
     }
 
