@@ -7,6 +7,7 @@ import com.yishan.javaplus.domain.Plate;
 import com.yishan.javaplus.repository.CarRepository;
 import com.yishan.javaplus.repository.PlateRepository;
 import com.yishan.javaplus.repository.ParkingTimeRepository;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 import java.util.Optional;
 
 import static junit.framework.TestCase.assertEquals;
@@ -75,26 +77,36 @@ public class CarServiceTest {
     @Test
     @Transactional
     public void findByIdWithParkingTimeTest() {
+
         Car cc = new Car();
         cc.setVin("8934758918");
         cc.setModel("Benz");
         cc.setBodyType("sedan");
+        carRepository.save(cc);
+
         Plate pp = new Plate();
+        pp.setCar(cc);
         pp.setState("DC");
         pp.setLicenseNumber("666");
+        plateRepository.save(pp);
+
         ParkingTime pt = new ParkingTime();
         pt.setCar(cc);
         pt.setDays(1);
         pt.setMin(66);
-        carRepository.save(cc);
-        plateRepository.save(pp);
         parkingTimeRepository.save(pt);
+
         em.flush();
         em.refresh(cc);
+        em.refresh(pt);
+
         Car testCc = carRepository.findByIdWithParkingTime(cc.getId());
         em.refresh(testCc);
-        assertNotNull(testCc);
-        assertEquals(pt, testCc.getParkingTimes());
+        assertNotNull(testCc.getId());
+        List<ParkingTime> list = testCc.getParkingTimes();
+        list.get(0);
+        assertEquals(pt, list.get(0));
+
 
     }
 }
