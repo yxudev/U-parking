@@ -1,0 +1,1 @@
+alter table garages drop column lot;

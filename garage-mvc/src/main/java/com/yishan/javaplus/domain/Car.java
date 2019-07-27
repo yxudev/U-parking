@@ -51,6 +51,14 @@ public class Car {
         return parkingTimes;
     }
 
+    public Garage getGarage(){
+        return garage;
+    }
+
+    public Plate getPlate() {
+        return plate;
+    }
+
     public Long getId() {
         return id;
     }
@@ -87,8 +95,8 @@ public class Car {
         this.parkingTimes = parkingTimes;
     }
 
-    public Plate getPlate() {
-        return plate;
+    public void setGarage(Garage garage) {
+        this.garage = garage;
     }
 
     public void setPlate(Plate plate) {

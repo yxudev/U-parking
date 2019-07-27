@@ -25,32 +25,51 @@ public class Garage {
 
 
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "car_id")
+    @JoinColumn(name = "cars_id")
     private Car car;
 
 
     public Garage(){
 
     }
-    public Long getId() { return id; }
-    public int getLotNumber(){
-        return this.lotNumber;
+
+    public Long getId() {
+        return id;
     }
-    public void setLotNumber(int lotNumber){
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public int getLotNumber() {
+        return lotNumber;
+    }
+
+    public void setLotNumber(int lotNumber) {
         this.lotNumber = lotNumber;
     }
 
-    public String getCity(){
-        return this.city;
+    public String getCity() {
+        return city;
     }
-    public void setCity(String city){
+
+    public void setCity(String city) {
         this.city = city;
     }
 
-    public String getGarageName(){
-        return this.garageName;
+    public String getGarageName() {
+        return garageName;
     }
-    public void setGarageName(String garageName){
+
+    public void setGarageName(String garageName) {
         this.garageName = garageName;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
     }
 }

@@ -22,7 +22,7 @@ public class CarService {
         save(newCar);
         return newCar;
     }
-    public String carID = UUID.randomUUID().toString();
+    public String carId = UUID.randomUUID().toString();
 
     public Car addCar() {
         return new Car();

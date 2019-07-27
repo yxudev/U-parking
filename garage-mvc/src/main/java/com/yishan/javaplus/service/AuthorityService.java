@@ -28,11 +28,5 @@ public class AuthorityService {
     }
 
 
-//
-//    public Authority findByUser(){
-//        return authorityRepository.findByUser(username);
-//    }
-
-
 
 }
