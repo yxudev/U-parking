@@ -27,6 +27,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         catch (Exception repositoryProblem){
             logger.debug("catch AuthenticationServiceException from AuthenticationProvider");
         }
+        //TODO  findAuthoritesByUserId;
+
         return domainUser;
     }
 }

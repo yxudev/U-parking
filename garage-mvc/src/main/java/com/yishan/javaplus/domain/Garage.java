@@ -46,7 +46,7 @@ public class Garage {
     }
 
     public void setLotNumber(int lotNumber) {
-        this.lotNumber = lotNumber;
+         this.lotNumber = lotNumber;
     }
 
     public String getCity() {
@@ -72,4 +72,5 @@ public class Garage {
     public void setCar(Car car) {
         this.car = car;
     }
+
 }

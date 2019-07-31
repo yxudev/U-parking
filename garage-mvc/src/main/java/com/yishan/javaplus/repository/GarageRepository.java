@@ -1,9 +1,6 @@
 package com.yishan.javaplus.repository;
 
-import com.yishan.javaplus.domain.Car;
 import com.yishan.javaplus.domain.Garage;
-import com.yishan.javaplus.domain.Plate;
-import com.yishan.javaplus.domain.User;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -16,6 +13,18 @@ public interface GarageRepository extends CrudRepository<Garage, Long> {
 //    List<String> findAllWithImage();
 
 
+    List<Garage> findAll();
+    Garage findByCity(String City);
+    Garage findByLotNumber(int LotNumber);
+    Garage findByGarageName(String GarageName);
+    Garage deleteGarageById(Long Id);
+
+
+
+
     @Query("Select g FROM Garage g LEFT JOIN FETCH g.car where g.id = ?1")
-    Garage findByIdWithCar(Long garageId);
+    Garage findByLot(int lotNumber);
+
+
+
 }

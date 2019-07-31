@@ -78,7 +78,6 @@ import java.util.UUID;
         String encodePassword = encoder.encode(newUser.getPassword());
         newUser.setPassword(encodePassword);
         save(newUser);
-       // messageSQSService.sendMessageRequest("xxx");
         addAuthority(newUser, AuthorityRole.ROLE_REGISTERED_USER);
         save(newUser);
         return newUser;
