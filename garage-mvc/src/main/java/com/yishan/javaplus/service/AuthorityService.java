@@ -5,9 +5,11 @@ import com.yishan.javaplus.domain.User;
 import com.yishan.javaplus.repository.AuthorityRepository;
 import com.yishan.javaplus.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class AuthorityService {
 
     @Autowired
@@ -16,8 +18,6 @@ public class AuthorityService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private User user;
 
     public AuthorityService(){
 
@@ -28,5 +28,13 @@ public class AuthorityService {
     }
 
 
+
+    public User addAuthority(User user, String role) {
+        Authority authority = new Authority();
+        authority.setAuthority(role);
+        authority.setUser(user);
+        authorityRepository.save(authority);
+        return userRepository.save(user);
+    }
 
 }

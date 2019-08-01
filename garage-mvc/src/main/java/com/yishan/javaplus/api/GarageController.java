@@ -61,7 +61,7 @@ public class GarageController {
     }
 
 
-    @RequestMapping(value ="/{Id}", method = RequestMethod.PATCH)
+    @RequestMapping(value ="/{Id}", method = RequestMethod.PATCH, params = {"lotNumber"})
     public Garage PatchLotNumber(@PathVariable("Id") Long garageId, @RequestParam("lotNumber") int lotNumber) {
         logger.debug("New lot number will be: " + lotNumber);
         Garage garage = garageService.findById(garageId);

@@ -4,6 +4,7 @@ package com.yishan.javaplus.service;
 import com.yishan.javaplus.config.AppConfig;
 import com.yishan.javaplus.domain.User;
 import com.yishan.javaplus.repository.UserRepository;
+import org.checkerframework.checker.units.qual.A;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +27,16 @@ public class UserServiceTest {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private UserService userService;
+
+    User user = new User();
+
+
     @Test
     @Transactional
     public void findByIdTest() {
-        User user = new User();
+
         user.setFirstName("anon");
         user.setLastName("lolllll");
         userRepository.save(user);
@@ -37,5 +44,22 @@ public class UserServiceTest {
         assertNotNull(testUser);
         assertEquals(user.getId(), testUser.get().getId());
     }
+
+    @Test
+    @Transactional
+    public void createNewUserTest() {
+        user.setFirstName("wvm");
+        user.setLastName("lkdnfn");
+        user.setEmail("fshkn@fsdkn.com");
+        user.setUsername("usr");
+        user.setPassword("www");
+        userService.save(user);
+        User testUser = userService.findById(user.getId());
+        assertNotNull(testUser);
+        assertEquals(user.getId(), testUser.getId());
+
+    }
+
+
 
 }

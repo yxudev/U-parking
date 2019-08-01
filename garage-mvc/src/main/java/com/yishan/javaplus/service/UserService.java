@@ -21,7 +21,7 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
-    private AuthorityRepository authorityRepository;
+    private AuthorityService authorityService;
 
 
     public User save(User user) {
@@ -57,23 +57,17 @@ public class UserService {
 
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    public User addAuthority(User user, String role) {
-        Authority authority = new Authority();
-        authority.setAuthority(role);
-        authority.setUser(user);
-        authorityRepository.save(authority);
-        return userRepository.save(user);
-    }
+
 
     @Transactional
     public User createNewUser(User newUser) {
-        String code = UUID.randomUUID().toString();
+//        String code = UUID.randomUUID().toString();
         String encodePassword = encoder.encode(newUser.getPassword());
         newUser.setPassword(encodePassword);
         save(newUser);
-        addAuthority(newUser, AuthorityRole.ROLE_REGISTERED_USER);
-        save(newUser);
-        return newUser;
+        authorityService.addAuthority(newUser, AuthorityRole.ROLE_REGISTERED_USER);
+//        save(newUser);
+        return save(newUser);
     }
 
 }

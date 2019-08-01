@@ -33,10 +33,10 @@ public class ServletConfig implements WebMvcConfigurer {
 
     }
 
-    @Override
-    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-        configurer.defaultContentType(MediaType.APPLICATION_JSON);
-    }
+//    @Override
+//    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+//        configurer.defaultContentType(MediaType.APPLICATION_JSON);
+//    }
 
     @Bean
     public DeviceHandlerMethodArgumentResolver deviceHandlerMethodArgumentResolver(){
@@ -47,16 +47,16 @@ public class ServletConfig implements WebMvcConfigurer {
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers){
         argumentResolvers.add(deviceHandlerMethodArgumentResolver());
     }
-    @Bean
-    public ViewResolver contentNegotiatingViewResolver(ContentNegotiationManager manager){
-        ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
-        resolver.setContentNegotiationManager(manager);
-
-        List<ViewResolver> viewResolversImpl = new ArrayList<>();
-        viewResolversImpl.add(jsonViewResolver());
-        resolver.setViewResolvers(viewResolversImpl);
-        return resolver;
-    }
+//    @Bean
+//    public ViewResolver contentNegotiatingViewResolver(ContentNegotiationManager manager){
+//        ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
+//        resolver.setContentNegotiationManager(manager);
+//
+//        List<ViewResolver> viewResolversImpl = new ArrayList<>();
+//        viewResolversImpl.add(jsonViewResolver());
+//        resolver.setViewResolvers(viewResolversImpl);
+//        return resolver;
+//    }
 
     @Bean(name = "multipartResolver")
     public CommonsMultipartResolver getMultipartResolver() {
@@ -66,8 +66,8 @@ public class ServletConfig implements WebMvcConfigurer {
     }
 
 
-    @Bean
-    public ViewResolver jsonViewResolver() {
-        return new JsonViewResolver();
-    }
+//    @Bean
+//    public ViewResolver jsonViewResolver() {
+//        return new JsonViewResolver();
+//    }
 }

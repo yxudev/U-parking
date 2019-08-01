@@ -29,6 +29,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
         //TODO  findAuthoritesByUserId;
 
+        //TODO unit test
+
+
+
         return domainUser;
     }
 }
