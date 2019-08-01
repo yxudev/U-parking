@@ -20,11 +20,6 @@ public interface GarageRepository extends CrudRepository<Garage, Long> {
     Garage deleteGarageById(Long Id);
 
 
-
-
     @Query("Select g FROM Garage g LEFT JOIN FETCH g.car where g.id = ?1")
-    Garage findByLot(int lotNumber);
-
-
-
+    Garage findByIdWithCar(Long garageId);
 }

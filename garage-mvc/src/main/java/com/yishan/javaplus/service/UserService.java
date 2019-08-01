@@ -16,26 +16,19 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-    public class UserService{
+public class UserService {
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
     private AuthorityRepository authorityRepository;
 
-//    @Autowired
-//    private MessageSQSService messageSQSService;
 
-
-//    @Override
-//    protected CrudRepository<User, Long> getCrudRepository(){return userRepository;}
-
-
-
-    public User save(User user){return userRepository.save(user);}
+    public User save(User user) {
+        return userRepository.save(user);
+    }
 
     public List<User> findAll() {
-//        List<User> users = Lists.newArrayList(userRepository.findAll());
         return userRepository.findAll();
     }
 
@@ -64,13 +57,13 @@ import java.util.UUID;
 
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    public User addAuthority(User user, String role){
+    public User addAuthority(User user, String role) {
         Authority authority = new Authority();
         authority.setAuthority(role);
         authority.setUser(user);
         authorityRepository.save(authority);
         return userRepository.save(user);
-        }
+    }
 
     @Transactional
     public User createNewUser(User newUser) {

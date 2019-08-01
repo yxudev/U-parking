@@ -1,7 +1,6 @@
 package com.yishan.javaplus.api;
 
 
-
 import com.yishan.javaplus.domain.Garage;
 import com.yishan.javaplus.service.GarageService;
 import org.slf4j.Logger;
@@ -18,7 +17,6 @@ public class GarageController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
 
-
     @Autowired
     private GarageService garageService;
 
@@ -32,7 +30,6 @@ public class GarageController {
         logger.debug("list cars");
         return garageService.findAll();
     }
-
 
     @RequestMapping(value = "/{Id}", method = RequestMethod.GET)
     public Garage getGarageById(@PathVariable("Id") Long garageId) {
@@ -55,19 +52,22 @@ public class GarageController {
         return resLot;
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
-    public Garage UpdateLotNumber(@RequestBody Garage garage) {
-        Garage resLot = garageService.updateLotNumber(garage.getLotNumber());
-        return resLot;
-
-    }
-
 
     @RequestMapping(method = RequestMethod.GET, params = {"garageName"})
     public Garage getGarageByGarageName(@RequestParam("garageName") String garageName) {
         logger.debug("Not your average garage: " + garageName);
         Garage resName = garageService.findByGarageName(garageName);
         return resName;
+    }
+
+
+    @RequestMapping(value ="/{Id}", method = RequestMethod.PATCH)
+    public Garage PatchLotNumber(@PathVariable("Id") Long garageId, @RequestParam("lotNumber") int lotNumber) {
+        logger.debug("New lot number will be: " + lotNumber);
+        Garage garage = garageService.findById(garageId);
+        Garage resLot2 = garageService.updateLotNumber(garage, lotNumber);
+        return resLot2;
+
     }
 
 }

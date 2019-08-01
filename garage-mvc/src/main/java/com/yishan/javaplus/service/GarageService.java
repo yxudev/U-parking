@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -23,6 +24,7 @@ public class GarageService {
     }
 
     public String GarageId = UUID.randomUUID().toString();
+
 
 
     @Transactional
@@ -73,9 +75,10 @@ public class GarageService {
     }
 
     @Transactional
-    public Garage updateLotNumber(int newLotNumber) {
-        Garage garage = new Garage();
-        garageRepository.findByLot(newLotNumber);
+    public Garage updateLotNumber(Garage garage, int lotNumber) {
+
+        garage.setLotNumber(lotNumber);
         return garageRepository.save(garage);
+
     }
 }
