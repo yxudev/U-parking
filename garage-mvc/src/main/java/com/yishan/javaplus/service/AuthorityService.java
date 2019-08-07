@@ -23,11 +23,6 @@ public class AuthorityService {
 
     }
 
-    public List<Authority> findAll() {
-        return authorityRepository.findAll();
-    }
-
-
 
     public User addAuthority(User user, String role) {
         Authority authority = new Authority();
@@ -37,4 +32,7 @@ public class AuthorityService {
         return userRepository.save(user);
     }
 
+    public List<Authority> findAuthorityByUser(User user) {
+        return this.authorityRepository.findByUser(user.getId());
+    }
 }

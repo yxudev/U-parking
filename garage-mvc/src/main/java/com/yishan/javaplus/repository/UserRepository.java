@@ -13,6 +13,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
     User findByEmail (String email);
     User findByUsername (String username);
 
+
 //    @Query
 //            ("Select u FROM users LEFT JOIN FETCH users.images")
 //    List<String> findAllWithImage();

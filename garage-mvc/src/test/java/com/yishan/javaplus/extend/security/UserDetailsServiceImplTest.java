@@ -3,8 +3,10 @@ package com.yishan.javaplus.extend.security;
 
 import com.yishan.javaplus.config.AppConfig;
 import com.yishan.javaplus.domain.User;
+import com.yishan.javaplus.repository.AuthorityRepository;
 import com.yishan.javaplus.repository.UserRepository;
 import com.yishan.javaplus.service.UserService;
+import org.checkerframework.checker.units.qual.A;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @WebAppConfiguration
 @ContextConfiguration(classes = {AppConfig.class})
@@ -25,26 +28,28 @@ import static junit.framework.TestCase.assertEquals;
 public class UserDetailsServiceImplTest extends UserDetailsServiceImpl{
 
     @Autowired
-    public UserDetailsService userDetailsService;
+    private UserService userService;
 
     @Autowired
-    public UserRepository userRepository;
+    private UserDetailsService userDetailsService;
 
 
     @Test
     @Transactional
     public void loadUserByUsernameTest(){
-            User uu = new User();
-            uu.setUsername("lalal");
-            uu.setLastName("saasas");
-            uu.setFirstName("dasdsadadsasdadad");
-            uu.setPassword("halashdsafals");
-            uu.setEmail("j.logan@gmail.com ");
-            uu.setPhoneNumber("123-456-7899");
-            uu.setZipCode("22222");
-            userRepository.save(uu);
-            UserDetails lalal = userDetailsService.loadUserByUsername(uu.getUsername());
-            assertEquals(uu.getUsername(), lalal.getUsername());
+            User user = new User();
+            user.setUsername("usr");
+            user.setLastName("last");
+            user.setFirstName("first");
+            user.setPassword("halashdsafals");
+            user.setEmail("j.logan@gmail.com ");
+            user.setPhoneNumber("123-456-7899");
+            user.setZipCode("20001");
+            userService.save(user);
+
+            UserDetails userTest = userDetailsService.loadUserByUsername("usr");
+            assertNotNull(userTest);
+            assertEquals(user.getUsername(), userTest.getUsername());
         }
 
 }
