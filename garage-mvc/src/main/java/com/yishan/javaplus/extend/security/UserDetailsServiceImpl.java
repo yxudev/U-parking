@@ -39,14 +39,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         try {
             domainUser = userService.findByUsername(username);
+                        List<Authority> authorities = authorityService.findAuthorityByUser(domainUser);
+            domainUser.setAuthorities(authorities);
         }
         catch (Exception repositoryProblem){
             logger.error("catch AuthenticationServiceException from AuthenticationProvider", repositoryProblem);
         }
-        finally {
-            List<Authority> authorities = authorityService.findAuthorityByUser(domainUser);
-            domainUser.setAuthorities(authorities);
-        }
+
         return domainUser;
     }
 
