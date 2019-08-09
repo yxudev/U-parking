@@ -64,7 +64,7 @@ public class User implements Serializable, UserDetails {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     @Column(name = "date_of_birth")
-    //TODO user signup broke
+
     protected LocalDate dateOfBirth;
 
     @Column(name = "phone_number", unique = true)

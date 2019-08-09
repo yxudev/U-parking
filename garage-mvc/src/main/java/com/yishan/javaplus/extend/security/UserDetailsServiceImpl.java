@@ -39,7 +39,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         try {
             domainUser = userService.findByUsername(username);
-                        List<Authority> authorities = authorityService.findAuthorityByUser(domainUser);
+            List<Authority> authorities = authorityService.findAuthorityByUser(domainUser);
             domainUser.setAuthorities(authorities);
         }
         catch (Exception repositoryProblem){

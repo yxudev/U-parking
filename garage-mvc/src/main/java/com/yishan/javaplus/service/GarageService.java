@@ -74,6 +74,7 @@ public class GarageService {
         return garageRepository.deleteGarageById(Id);
     }
 
+
     @Transactional
     public Garage updateLotNumber(Garage garage, int lotNumber) {
 
