@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface GarageRepository extends CrudRepository<Garage, Long> {
 
@@ -20,6 +21,8 @@ public interface GarageRepository extends CrudRepository<Garage, Long> {
     Garage deleteGarageById(Long Id);
 
 
+
+
     @Query("Select g FROM Garage g LEFT JOIN FETCH g.car where g.id = ?1")
-    Garage findByIdWithCar(Long garageId);
+    Garage findByIdWithGar(Long Id);
 }

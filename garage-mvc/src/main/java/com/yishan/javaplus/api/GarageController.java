@@ -27,7 +27,7 @@ public class GarageController {
 
     @RequestMapping(method = RequestMethod.GET)
     public List<Garage> getGarageList() {
-        logger.debug("list cars");
+        logger.debug("list garages");
         return garageService.findAll();
     }
 
@@ -62,11 +62,10 @@ public class GarageController {
 
 
     @RequestMapping(value ="/{Id}", method = RequestMethod.PATCH, params = {"lotNumber"})
-    public Garage PatchLotNumber(@PathVariable("Id") Long garageId, @RequestParam("lotNumber") int lotNumber) {
+    public Garage patchLotNumber(@PathVariable("Id") Long garageId, @RequestParam("lotNumber") int lotNumber) {
         logger.debug("New lot number will be: " + lotNumber);
-        Garage garage = garageService.findById(garageId);
-        Garage resLot2 = garageService.updateLotNumber(garage, lotNumber);
-        return resLot2;
+        Garage garage = garageService.findByIdWithGar(garageId);
+        return garageService.updateLotNumber(garage, lotNumber);
 
     }
 

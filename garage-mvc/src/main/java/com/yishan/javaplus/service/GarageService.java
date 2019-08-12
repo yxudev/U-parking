@@ -47,7 +47,11 @@ public class GarageService {
         return garageRepository.findAll();
     }
 
-    public Garage findById(Long Id) {
+    public Garage findByIdWithGar(Long Id) {
+        return garageRepository.findByIdWithGar(Id);
+}
+
+    public Garage findById(Long Id){
         return garageRepository.findById(Id).get();
     }
 
@@ -76,10 +80,10 @@ public class GarageService {
 
 
     @Transactional
-    public Garage updateLotNumber(Garage garage, int lotNumber) {
+    public Garage updateLotNumber(Garage garage1, int lotNumber) {
 
-        garage.setLotNumber(lotNumber);
-        return garageRepository.save(garage);
+        garage1.setLotNumber(lotNumber);
+        return garageRepository.save(garage1);
 
     }
 }
