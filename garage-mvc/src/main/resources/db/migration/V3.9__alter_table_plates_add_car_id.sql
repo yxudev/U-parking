@@ -1,0 +1,1 @@
+alter table plates add column car_id bigint default null;
