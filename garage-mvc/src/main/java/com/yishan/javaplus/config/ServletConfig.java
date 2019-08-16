@@ -22,6 +22,7 @@ import java.util.List;
 @ComponentScan("com.yishan.javaplus.api")
 @Import({SwaggerConfig.class})
 public class ServletConfig implements WebMvcConfigurer {
+
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer){configurer.enable();}
 
@@ -33,10 +34,17 @@ public class ServletConfig implements WebMvcConfigurer {
 
     }
 
-//    @Override
-//    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-//        configurer.defaultContentType(MediaType.APPLICATION_JSON);
-//    }
+    @Bean
+    public ViewResolver contentNegotiatingViewResolver(ContentNegotiationManager manager) {
+        ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
+        resolver.setContentNegotiationManager(manager);
+
+        List<ViewResolver> viewResolversImpl = new ArrayList<>();
+        viewResolversImpl.add(new JsonViewResolver());
+
+        resolver.setViewResolvers(viewResolversImpl);
+        return resolver;
+    }
 
     @Bean
     public DeviceHandlerMethodArgumentResolver deviceHandlerMethodArgumentResolver(){
@@ -47,16 +55,6 @@ public class ServletConfig implements WebMvcConfigurer {
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers){
         argumentResolvers.add(deviceHandlerMethodArgumentResolver());
     }
-//    @Bean
-//    public ViewResolver contentNegotiatingViewResolver(ContentNegotiationManager manager){
-//        ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
-//        resolver.setContentNegotiationManager(manager);
-//
-//        List<ViewResolver> viewResolversImpl = new ArrayList<>();
-//        viewResolversImpl.add(jsonViewResolver());
-//        resolver.setViewResolvers(viewResolversImpl);
-//        return resolver;
-//    }
 
     @Bean(name = "multipartResolver")
     public CommonsMultipartResolver getMultipartResolver() {
@@ -64,10 +62,4 @@ public class ServletConfig implements WebMvcConfigurer {
         resolver.setMaxUploadSize(10008439);
         return resolver;
     }
-
-
-//    @Bean
-//    public ViewResolver jsonViewResolver() {
-//        return new JsonViewResolver();
-//    }
 }

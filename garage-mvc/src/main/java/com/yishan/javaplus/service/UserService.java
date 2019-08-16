@@ -66,7 +66,7 @@ public class UserService {
         newUser.setPassword(encodePassword);
         save(newUser);
         authorityService.addAuthority(newUser, AuthorityRole.ROLE_REGISTERED_USER);
-//        save(newUser);
+        save(newUser);
         return save(newUser);
     }
 

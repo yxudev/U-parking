@@ -40,7 +40,7 @@
              and fully-qualified @Configuration classes -->
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>com.yishan.javaplus.config.MvcConfig</param-value>
+            <param-value>com.yishan.javaplus.config.ServletConfig</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>

@@ -59,6 +59,23 @@ public class CarServiceTest {
 
     @Test
     @Transactional
+    public void yasiTest() {
+        Car c = new Car();
+        Garage g = new Garage();
+        c.setModel("Tesla");
+        c.setBodyType("sedan");
+        g.setGarage("sa");
+        g.setPlate("sasasas422");
+        carRepository.save(c);
+//        em.flush();
+//        em.refresh(c);
+        Optional<Car> testCa = carRepository.findById(c.getId());
+        assertNotNull(testCa);
+        assertEquals(c.getId(), testCa.get().getId());
+    }
+
+    @Test
+    @Transactional
     public void findByIdWithPlateTest() {
         Car car = new Car();
         car.setVin("83497158973198");

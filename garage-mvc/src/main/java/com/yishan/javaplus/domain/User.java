@@ -1,6 +1,7 @@
 package com.yishan.javaplus.domain;
 
 
+import com.amazonaws.services.dynamodbv2.xspec.S;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.lang.NonNull;
@@ -24,13 +25,12 @@ public class User implements Serializable, UserDetails {
     private Long id;
 
     @Column(name = "first_name")
-    public String firstName;
+    private String firstName;
 
     @Column(name = "last_name")
-    public String lastName;
+    private String lastName;
 
     @Column(name = "email", unique = true)
-    @NonNull
     private String email;
 
     @Column(name = "password")
@@ -40,32 +40,31 @@ public class User implements Serializable, UserDetails {
     private String username;
 
     @Column(name = "zip_code")
-    public String zipCode;
+    private String zipCode;
 
     @Column(name = "acc_locker")
     @JsonIgnore
-    public boolean accountLocked=Boolean.FALSE;
+    private boolean accountLocked=Boolean.FALSE;
 
     @Column(name = "acc_expired")
     @JsonIgnore
-    public boolean accountExpired=Boolean.FALSE;
+    private boolean accountExpired=Boolean.FALSE;
 
     @Column(name = "cred_expired")
     @JsonIgnore
-    public boolean credentialsExpired=Boolean.FALSE;
+    private boolean credentialsExpired=Boolean.FALSE;
 
     @Column(name = "is_enabled")
     @JsonIgnore
-    public boolean enabled=Boolean.TRUE;
+    private boolean enabled=Boolean.TRUE;
 
     @Transient
     @JsonIgnore
     private Collection<? extends GrantedAuthority> authorities;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     @Column(name = "date_of_birth")
-
-    protected LocalDate dateOfBirth;
+    private String dateOfBirth;
 
     @Column(name = "phone_number", unique = true)
     private String phoneNumber;
@@ -167,10 +166,10 @@ public class User implements Serializable, UserDetails {
         this.zipCode = zipCode;
     }
 
-    public LocalDate getDateOfBirth(){
+    public String getDateOfBirth(){
         return this.dateOfBirth;
     }
-    public void setDateOfBirth(LocalDate dateOfBirth){
+    public void setDateOfBirth(String dateOfBirth){
         this.dateOfBirth = dateOfBirth;
     }
 
