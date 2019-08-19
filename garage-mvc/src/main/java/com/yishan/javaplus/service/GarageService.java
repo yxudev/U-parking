@@ -86,4 +86,11 @@ public class GarageService {
         return garageRepository.save(garage1);
 
     }
+
+    @Transactional
+    public Garage reNewGarage(Garage garage2) {
+            return garageRepository.save(garage2);
+
+    }
+
 }

@@ -2,6 +2,7 @@ package com.yishan.javaplus.api;
 
 
 import com.yishan.javaplus.domain.Garage;
+import com.yishan.javaplus.repository.GarageRepository;
 import com.yishan.javaplus.service.GarageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,9 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+
+import static com.amazonaws.services.cloudsearchv2.model.AnalysisSchemeLanguage.Id;
 
 @RestController
 @RequestMapping(value = {"/api/garages", "/api/garage"}, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -19,6 +23,7 @@ public class GarageController {
 
     @Autowired
     private GarageService garageService;
+
 
     @RequestMapping(method = RequestMethod.POST)
     public Garage createNewGarage(@RequestBody Garage garage) {
@@ -66,6 +71,13 @@ public class GarageController {
         logger.debug("New lot number will be: " + lotNumber);
         Garage garage = garageService.findByIdWithGar(garageId);
         return garageService.updateLotNumber(garage, lotNumber);
+
+    }
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public Garage updateLotNumber(@RequestBody Garage garage) {
+        logger.debug("New garage will be: " + garage);
+        return garageService.reNewGarage(garage);
 
     }
 
