@@ -75,7 +75,7 @@ public class GarageController {
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public Garage updateLotNumber(@RequestBody Garage garage) {
+    public Garage updateGarage(@RequestBody Garage garage) {
         logger.debug("New garage will be: " + garage);
         return garageService.reNewGarage(garage);
 
