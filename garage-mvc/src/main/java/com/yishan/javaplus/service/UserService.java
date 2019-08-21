@@ -1,6 +1,7 @@
 package com.yishan.javaplus.service;
 
 import com.yishan.javaplus.domain.Authority;
+import com.yishan.javaplus.domain.Garage;
 import com.yishan.javaplus.domain.User;
 import com.yishan.javaplus.enumdef.AuthorityRole;
 import com.yishan.javaplus.repository.AuthorityRepository;
@@ -68,6 +69,32 @@ public class UserService {
         authorityService.addAuthority(newUser, AuthorityRole.ROLE_REGISTERED_USER);
         save(newUser);
         return save(newUser);
+    }
+
+    @Transactional
+    public User changeUserName(User user, String username) {
+        user.setUsername(username);
+        return userRepository.save(user);
+
+    }
+
+    @Transactional
+    public User changeUserEverything(User user) {
+        String encodePassword = encoder.encode(user.getPassword());
+        user.setPassword(encodePassword);
+        return userRepository.save(user);
+
+    }
+
+    @Transactional
+    public List<User> findAllOrderByUsername(String username){
+        List<User> usernames = userRepository.findAllOrderByUsername(username);
+        return usernames;
+    }
+
+    @Transactional
+    public User findByIdWithLol(Long Id) {
+        return userRepository.findByIdWithLol(Id);
     }
 
 }

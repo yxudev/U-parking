@@ -51,6 +51,7 @@ public class GarageService {
         return garageRepository.findByIdWithGar(Id);
 }
 
+
     public Garage findById(Long Id){
         return garageRepository.findById(Id).get();
     }

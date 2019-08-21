@@ -1,17 +1,12 @@
 package com.yishan.javaplus.domain;
 
 
-import com.amazonaws.services.dynamodbv2.xspec.S;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.lang.NonNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Collection;
 
 import static javax.persistence.GenerationType.SEQUENCE;
@@ -146,10 +141,12 @@ public class User implements Serializable, UserDetails {
     }
 
 
-
+    @JsonIgnore
     public String getPassword(){
         return this.password;
     }
+
+    @JsonProperty
     public void setPassword(String password){ this.password = password; }
 
     public String getUsername(){
