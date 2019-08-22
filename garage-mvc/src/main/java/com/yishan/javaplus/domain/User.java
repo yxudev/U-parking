@@ -13,7 +13,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
 @Table(name = "users")
-public class User implements Serializable, UserDetails {
+public class User implements Serializable, UserDetails, Comparable<User>{
     @Id
     @GeneratedValue(strategy=SEQUENCE, generator="users_id_seq")
     @SequenceGenerator(name="users_id_seq", sequenceName="users_id_seq", allocationSize=1)
@@ -175,5 +175,10 @@ public class User implements Serializable, UserDetails {
     }
     public void setPhoneNumber(String phoneNumber){
         this.phoneNumber = phoneNumber;
+    }
+
+    @Override
+    public int compareTo(User o) {
+        return this.getUsername().compareTo(o.getUsername());
     }
 }

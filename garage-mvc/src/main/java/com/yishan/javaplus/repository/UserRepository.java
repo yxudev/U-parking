@@ -3,7 +3,6 @@ package com.yishan.javaplus.repository;
 import com.yishan.javaplus.domain.User;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-
 import java.util.List;
 
 public interface UserRepository extends CrudRepository<User, Long> {
@@ -29,4 +28,5 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     @Query("select u from User u order by u.username")
     List<User> findAllOrderByUsername(String username);
+
 }

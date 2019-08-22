@@ -1,20 +1,19 @@
 package com.yishan.javaplus.service;
 
-import com.yishan.javaplus.domain.Authority;
-import com.yishan.javaplus.domain.Garage;
+import com.amazonaws.services.dynamodbv2.xspec.L;
+import com.amazonaws.services.dynamodbv2.xspec.S;
 import com.yishan.javaplus.domain.User;
 import com.yishan.javaplus.enumdef.AuthorityRole;
-import com.yishan.javaplus.repository.AuthorityRepository;
 import com.yishan.javaplus.repository.UserRepository;
-import com.yishan.javaplus.service.jms.MessageSQSService;
-import org.geolatte.geom.M;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class UserService {
@@ -24,6 +23,7 @@ public class UserService {
     @Autowired
     private AuthorityService authorityService;
 
+    private ArrayList<String> ArrayList;
 
     public User save(User user) {
         return userRepository.save(user);
@@ -91,6 +91,25 @@ public class UserService {
         List<User> usernames = userRepository.findAllOrderByUsername(username);
         return usernames;
     }
+
+
+
+    public List<User> getUserNameList(){
+        List<User> allUsers = userRepository.findAll();
+//        List<User> list = new ArrayList<>();
+//
+//        for(int i = 0; i <100; i++) {
+//        list.add(userRepository.findAllUsername());
+//        }
+        return allUsers;
+    }
+
+    public List<User> mono(List<User> usr) {
+//        List<User> list = new ArrayList<>(usr);
+       Collections.sort(usr);
+        return usr;
+    }
+
 
     @Transactional
     public User findByIdWithLol(Long Id) {
