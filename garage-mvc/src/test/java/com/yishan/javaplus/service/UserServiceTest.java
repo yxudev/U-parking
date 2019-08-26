@@ -14,6 +14,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import static junit.framework.TestCase.assertEquals;
@@ -31,6 +35,10 @@ public class UserServiceTest {
     private UserService userService;
 
     User user = new User();
+
+    @Autowired
+    private EntityManager em;
+
 
 
     @Test
@@ -58,6 +66,18 @@ public class UserServiceTest {
         assertNotNull(testUser);
         assertEquals(user.getId(), testUser.getId());
 
+    }
+
+
+
+    @Test
+    @Transactional
+    public void sortAllUsersByUsernamesTest() {
+
+        List<User> sorted = userService.sortAllUsersByUsernames(userService.findAll());
+        List<User> original = new ArrayList<>(userService.findAll());
+        Collections.sort(original);
+        assertEquals (sorted, original);
     }
 
 

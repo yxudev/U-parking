@@ -93,19 +93,7 @@ public class UserService {
     }
 
 
-
-    public List<User> getUserNameList(){
-        List<User> allUsers = userRepository.findAll();
-//        List<User> list = new ArrayList<>();
-//
-//        for(int i = 0; i <100; i++) {
-//        list.add(userRepository.findAllUsername());
-//        }
-        return allUsers;
-    }
-
-    public List<User> mono(List<User> usr) {
-//        List<User> list = new ArrayList<>(usr);
+    public List<User> sortAllUsersByUsernames(List<User> usr) {
        Collections.sort(usr);
         return usr;
     }
