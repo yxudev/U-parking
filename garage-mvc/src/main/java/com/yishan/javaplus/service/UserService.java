@@ -1,17 +1,13 @@
 package com.yishan.javaplus.service;
 
-import com.amazonaws.services.dynamodbv2.xspec.L;
-import com.amazonaws.services.dynamodbv2.xspec.S;
 import com.yishan.javaplus.domain.User;
 import com.yishan.javaplus.enumdef.AuthorityRole;
 import com.yishan.javaplus.repository.UserRepository;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,8 +18,6 @@ public class UserService {
 
     @Autowired
     private AuthorityService authorityService;
-
-    private ArrayList<String> ArrayList;
 
     public User save(User user) {
         return userRepository.save(user);
@@ -93,6 +87,13 @@ public class UserService {
     }
 
 
+    @Transactional
+    public List<User> getUsersListWithFirstAndLastNames(List<User> users){
+        Collections.sort(users, new SortUserWithFirstAndLastNames());
+       return users;
+    }
+
+    @Transactional
     public List<User> sortAllUsersByUsernames(List<User> usr) {
        Collections.sort(usr);
         return usr;

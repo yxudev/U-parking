@@ -28,5 +28,4 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     @Query("select u from User u order by u.username")
     List<User> findAllOrderByUsername(String username);
-
 }

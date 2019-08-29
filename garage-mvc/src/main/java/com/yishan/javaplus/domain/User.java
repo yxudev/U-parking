@@ -8,13 +8,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Comparator;
 import java.lang.Comparable;
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
 @Table(name = "users")
-public class User implements Serializable, UserDetails, Comparable<User>, Comparator<User> {
+public class User implements Serializable, UserDetails, Comparable<User>{
     @Id
     @GeneratedValue(strategy=SEQUENCE, generator="users_id_seq")
     @SequenceGenerator(name="users_id_seq", sequenceName="users_id_seq", allocationSize=1)
@@ -178,20 +177,14 @@ public class User implements Serializable, UserDetails, Comparable<User>, Compar
         this.phoneNumber = phoneNumber;
     }
 
+//    @Override
+//    public int compareTo(User o) {
+//        return this.getUsername().compareTo(o.getUsername());
+//    }
+
     @Override
     public int compareTo(User o) {
         return this.getUsername().compareTo(o.getUsername());
     }
 
-    @Override
-    public int compare(User o1, User o2) {
-
-        return o1.getFirstName().compareTo(o2.getFirstName());
-    }
-
-    @Override
-    public int compare(User o1, User o2) {
-
-        return o1.getLastName()-o2.getLastName();
-    }
 }
