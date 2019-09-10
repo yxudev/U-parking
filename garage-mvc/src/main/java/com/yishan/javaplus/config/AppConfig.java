@@ -21,13 +21,14 @@ import java.io.IOException;
 import static org.slf4j.LoggerFactory.getLogger;
 
 @Configuration
-@ComponentScan(basePackages = "com.yishan.javaplus",
-    excludeFilters = @ComponentScan.Filter(type = FilterType.REGEX,pattern = "com.yishan.javaplus.api.*"))
+@ComponentScan(basePackages = "com.yishan.javaplus", excludeFilters = @ComponentScan.Filter(type = FilterType.REGEX,pattern = "com.yishan.javaplus.api.*"))
 public class AppConfig {
 
     @Autowired
     private Environment environment;
+
     private final Logger logger = getLogger(getClass());
+
     @Value("${queueName}")
     private String queueName;
 
@@ -60,7 +61,7 @@ public class AppConfig {
     @Profile({"dev","test","prod","staging"})
     public MessageSQSService getMessageSQSService() throws IOException{
         AmazonSQS sqs = AmazonSQSClientBuilder.standard().withCredentials(new DefaultAWSCredentialsProviderChain()).build();
-        MessageSQSService messageSQSService = new MessageSQSService(sqs, queueName);
+        MessageSQSService messageSQSService = new MessageSQSService(sqs, "queueName");
         return messageSQSService;
     }
 }

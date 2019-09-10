@@ -1,5 +1,6 @@
 package com.yishan.javaplus.api;
 
+import com.amazonaws.services.sqs.model.SendMessageRequest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yishan.javaplus.service.jms.MessageSQSService;
@@ -34,12 +35,13 @@ public class SQSController {
         map.put("domainName", domainName);
         try {
             json = mapper.writeValueAsString(map);
-            messageSQSService.sendMessageRequest("yasi");
+            messageSQSService.sendMessage( "Aloha");
         } catch (JsonProcessingException e) {
             logger.error("error message", e);
         }
         return Boolean.TRUE;
     }
+
 
 
 }

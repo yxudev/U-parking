@@ -13,7 +13,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-@RestController("UtilRestLol")
+//@RestController("UtilRestLol")
 @RequestMapping(value = "/api/misc")
 public class FileCloudController {
 

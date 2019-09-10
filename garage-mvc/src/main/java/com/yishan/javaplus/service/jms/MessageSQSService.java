@@ -1,39 +1,37 @@
 package com.yishan.javaplus.service.jms;
 
 import com.amazonaws.services.sqs.AmazonSQS;
-import com.amazonaws.services.sqs.model.CreateQueueRequest;
-import com.amazonaws.services.sqs.model.Message;
-import com.amazonaws.services.sqs.model.SendMessageRequest;
+import com.amazonaws.services.sqs.model.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
 
+@Service
 public class MessageSQSService {
 
     private AmazonSQS sqs;
 
     private String queueUrl;
-    private String queueName;
 
-    public MessageSQSService(AmazonSQS sqs, String queueName) {
-        this.sqs = sqs;
-        this.queueName = queueName;
-        CreateQueueRequest createQueueRequest = new CreateQueueRequest(queueName);
-    //    queueUrl = sqs.createQueue(createQueueRequest)
-    //                  .getQueueUrl();
+
+
+    private String getQueueUrl(String queueName){
+        GetQueueUrlResult getQueueUrlResult = sqs.getQueueUrl(queueName);
+        String queueUrl = getQueueUrlResult.getQueueUrl();
+        return queueUrl;
 
     }
 
-    public void sendMessageRequest(String msg) {
-        String queueUrl = sqs.getQueueUrl(queueName).getQueueUrl();
-        SendMessageRequest send_msg_request = new SendMessageRequest()
-                .withQueueUrl(queueUrl)
-                .withMessageBody(msg)
-                .withDelaySeconds(5);
-        sqs.sendMessage(send_msg_request);
+    public MessageSQSService(@Autowired AmazonSQS sqs , @Value("${aws.queueName}")String queueName){
+        this.sqs=sqs;
+        this.queueUrl= getQueueUrl(queueName);
     }
 
-    public void receiveMessageRequest() {
-        String queueUrl = sqs.getQueueUrl(queueName).getQueueUrl();
-        List<Message> receivedMessages = sqs.receiveMessage(queueUrl).getMessages();
+    public void sendMessage(String messageBody) {
+        SendMessageRequest sendMessageRequest = new SendMessageRequest()
+                .withQueueUrl(this.queueUrl)
+                .withMessageBody(messageBody);
+        sqs.sendMessage(sendMessageRequest);
     }
 }
