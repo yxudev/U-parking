@@ -7,7 +7,6 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import com.yishan.javaplus.service.StorageService;
-import com.yishan.javaplus.service.jms.MessageSQSService;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,7 +15,6 @@ import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 
-import java.io.IOException;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -50,18 +48,17 @@ public class AppConfig {
 
     @Bean
     @Profile({"dev","test","prod","staging"})
-    public StorageService getStorageService() throws IOException {
+    public StorageService getStorageService(){
         AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withCredentials(new DefaultAWSCredentialsProviderChain()).build();
         StorageService storageService = new StorageService(s3Client);
-        storageService.setBucket("miparquelot");
+        storageService.setBucket("S3Bucket");
         return storageService;
     }
 
-    @Bean
+    @Bean(name = "AmazonSQS")
     @Profile({"dev","test","prod","staging"})
-    public MessageSQSService getMessageSQSService() throws IOException{
-        AmazonSQS sqs = AmazonSQSClientBuilder.standard().withCredentials(new DefaultAWSCredentialsProviderChain()).build();
-        MessageSQSService messageSQSService = new MessageSQSService(sqs, "queueName");
-        return messageSQSService;
+    public AmazonSQS getMessageSQSService(){
+        AmazonSQS sqsClient = AmazonSQSClientBuilder.standard().withCredentials(new DefaultAWSCredentialsProviderChain()).build();
+        return sqsClient;
     }
 }

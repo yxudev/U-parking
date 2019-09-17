@@ -6,26 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class MessageSQSService {
 
     private AmazonSQS sqs;
-
     private String queueUrl;
 
+    public MessageSQSService(@Autowired AmazonSQS sqs, @Value("${aws.queueName}")String queueName){
+        this.sqs=sqs;
+        this.queueUrl= getQueueUrl(queueName);
+    }
 
 
     private String getQueueUrl(String queueName){
         GetQueueUrlResult getQueueUrlResult = sqs.getQueueUrl(queueName);
         String queueUrl = getQueueUrlResult.getQueueUrl();
         return queueUrl;
-
-    }
-
-    public MessageSQSService(@Autowired AmazonSQS sqs , @Value("${aws.queueName}")String queueName){
-        this.sqs=sqs;
-        this.queueUrl= getQueueUrl(queueName);
     }
 
     public void sendMessage(String messageBody) {
@@ -34,4 +30,9 @@ public class MessageSQSService {
                 .withMessageBody(messageBody);
         sqs.sendMessage(sendMessageRequest);
     }
+
+    public void receiveMessage(){
+        sqs.receiveMessage(queueUrl);
+    }
 }
+
