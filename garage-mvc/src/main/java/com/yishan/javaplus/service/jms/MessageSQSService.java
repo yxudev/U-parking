@@ -2,6 +2,7 @@ package com.yishan.javaplus.service.jms;
 
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.model.*;
+import org.geolatte.geom.M;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -34,5 +35,6 @@ public class MessageSQSService {
     public void receiveMessage(){
         sqs.receiveMessage(queueUrl);
     }
+
 }
 

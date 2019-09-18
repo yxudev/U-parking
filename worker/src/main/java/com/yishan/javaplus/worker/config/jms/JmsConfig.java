@@ -23,27 +23,27 @@ public class JmsConfig {
     @Value("${aws.region}")
     private String region;
 
-    @Bean(name="connectionFactory")
-    public SQSConnectionFactory getSQSConnectionFactory(){
+    @Bean(name = "connectionFactory")
+    public SQSConnectionFactory getSQSConnectionFactory() {
         AmazonSQS amazonSQSClient = AmazonSQSClientBuilder.standard().withCredentials(new DefaultAWSCredentialsProviderChain()).withRegion(region).build();
-        SQSConnectionFactory factory = new SQSConnectionFactory( new ProviderConfiguration(),amazonSQSClient);
+        SQSConnectionFactory factory = new SQSConnectionFactory(new ProviderConfiguration(), amazonSQSClient);
         return factory;
     }
 
     @Bean
-    public JmsTemplate getJmsTemplate(@Autowired SQSConnectionFactory connectionFactory){
+    public JmsTemplate getJmsTemplate(@Autowired SQSConnectionFactory connectionFactory) {
         JmsTemplate jmsTemplate = new JmsTemplate(connectionFactory);
         return jmsTemplate;
     }
 
     @Bean
-    public DynamicDestinationResolver getTopicDynamicDestinationResolver(){
+    public DynamicDestinationResolver getTopicDynamicDestinationResolver() {
         return new DynamicDestinationResolver();
     }
 
-    @Bean(name="jmsListenerContainerFactory")
+    @Bean(name = "jmsListenerContainerFactory")
     @DependsOn("connectionFactory")
-    public DefaultJmsListenerContainerFactory getDefaultJmsListenerContainerFactory(@Autowired SQSConnectionFactory connectionFactory,@Autowired DynamicDestinationResolver dynamicDestinationResolver){
+    public DefaultJmsListenerContainerFactory getDefaultJmsListenerContainerFactory(@Autowired SQSConnectionFactory connectionFactory, @Autowired DynamicDestinationResolver dynamicDestinationResolver) {
         DefaultJmsListenerContainerFactory jmsListenerContainerFactory = new DefaultJmsListenerContainerFactory();
         jmsListenerContainerFactory.setSessionTransacted(false);
         jmsListenerContainerFactory.setConnectionFactory(connectionFactory);
@@ -52,7 +52,4 @@ public class JmsConfig {
         jmsListenerContainerFactory.setSessionAcknowledgeMode(Session.AUTO_ACKNOWLEDGE);
         return jmsListenerContainerFactory;
     }
-
-
-
 }
