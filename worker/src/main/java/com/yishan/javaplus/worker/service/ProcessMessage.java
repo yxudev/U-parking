@@ -1,6 +1,5 @@
 //package com.yishan.javaplus.worker.service;
 //
-//
 //import org.springframework.jms.annotation.JmsListener;
 //import org.springframework.stereotype.Component;
 //

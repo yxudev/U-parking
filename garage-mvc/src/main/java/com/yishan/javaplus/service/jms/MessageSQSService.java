@@ -18,7 +18,6 @@ public class MessageSQSService {
         this.queueUrl= getQueueUrl(queueName);
     }
 
-
     private String getQueueUrl(String queueName){
         GetQueueUrlResult getQueueUrlResult = sqs.getQueueUrl(queueName);
         String queueUrl = getQueueUrlResult.getQueueUrl();
