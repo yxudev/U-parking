@@ -26,12 +26,8 @@ public class JmsConfig {
     @Value("${aws.region}")
     private String region;
 
-    @Bean
-    public AmazonSQS getAmazonSQS() {
-        AmazonSQS amazonSQS = AmazonSQSClientBuilder.standard().withCredentials(new DefaultAWSCredentialsProviderChain()).build();
-        return amazonSQS;
-
-    }
+    @Autowired
+    private AmazonSQS amazonSQS;
 
     @Bean(name = "connectionFactory")
     public SQSConnectionFactory getSQSConnectionFactory() {
