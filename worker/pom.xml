@@ -20,6 +20,11 @@
             <artifactId>spring-boot-starter-activemq</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.twilio.sdk</groupId>
+            <artifactId>twilio</artifactId>
+            <version>7.42.0</version>
+        </dependency>
 
         <dependency>
             <groupId>com.amazonaws</groupId>
@@ -53,7 +58,6 @@
             <version>1.11.510</version>
             <scope>compile</scope>
         </dependency>
-
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>amazon-sqs-java-messaging-lib</artifactId>
