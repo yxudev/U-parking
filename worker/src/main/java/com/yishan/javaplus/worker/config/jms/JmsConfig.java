@@ -26,9 +26,6 @@ public class JmsConfig {
     @Value("${aws.region}")
     private String region;
 
-    @Autowired
-    private AmazonSQS amazonSQS;
-
     @Bean(name = "connectionFactory")
     public SQSConnectionFactory getSQSConnectionFactory() {
         AmazonSQS amazonSQS = AmazonSQSClientBuilder

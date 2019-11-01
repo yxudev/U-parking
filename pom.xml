@@ -9,5 +9,6 @@
     <modules>
         <module>garage-mvc</module>
         <module>worker</module>
+        <module>smssender</module>
     </modules>
 </project>
